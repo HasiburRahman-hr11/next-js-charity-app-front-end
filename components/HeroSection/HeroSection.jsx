@@ -12,6 +12,20 @@ const styles = {
         },
         padding: '100px 0'
     },
+    title: {
+        fontSize: '70px',
+        fontFamily: "'Oswald', sans-serif",
+        fontWeight: '700',
+        color: 'var(--title-color)',
+        marginBottom: '35px'
+    },
+    text: {
+        color: '#666',
+        fontSize: '20px',
+        lineHeight: '27px',
+        maxWidth: '450px',
+        marginBottom: '35px'
+    },
     heroRight: {
         position: 'absolute',
         display: {
@@ -32,7 +46,7 @@ const styles = {
             position: 'absolute',
             right: '-100px',
             bottom: '0',
-            top: '100px'
+            top: '120px'
         }
     }
 }
@@ -48,13 +62,7 @@ const HeroSection = () => {
                         <Box component="div" sx={{
                             paddingTop: { lg: '130px' }
                         }}>
-                            <Typography variant='h1' component="h1" sx={{
-                                fontSize: '70px',
-                                fontFamily: "'Oswald', sans-serif",
-                                fontWeight:'700',
-                                color:'var(--title-color)',
-                                marginBottom:'35px'
-                            }}>
+                            <Typography variant='h1' component="h1" sx={styles.title}>
                                 Lets be kind for
                                 <Box component="span" sx={{
                                     color: 'var(--primary-color)',
@@ -64,13 +72,7 @@ const HeroSection = () => {
                                     }
                                 }}>Children</Box>
                             </Typography>
-                            <Typography variant='p' component="p" sx={{
-                                color:'#666',
-                                fontSize:'20px',
-                                lineHeight:'27px',
-                                maxWidth:'450px',
-                                marginBottom:'35px'
-                            }}>
+                            <Typography variant='p' component="p" sx={styles.text}>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate perferendis sapiente aut.
                             </Typography>
                             <Link href="/cases">
