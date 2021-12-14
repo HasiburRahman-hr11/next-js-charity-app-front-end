@@ -18,7 +18,7 @@
 }
 
 .menu__item.active {
-    color: #07CC7E;
+    color: var(--primary-color);
 }
 
 .menu__item a {
