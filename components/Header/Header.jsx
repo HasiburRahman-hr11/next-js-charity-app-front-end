@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 import { Container, Grid, Box } from '@mui/material';
 
-import logo from '../../assets/images/logo.png';
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -20,7 +19,7 @@ const Header = () => {
                 }}>
                     <Grid item xs={6} md={3}>
                         <Link href='/' >
-                            <a style={{ position: "relative", width: "100%", paddingBottom: "20%" , display:'block', maxWidth:'170px' }}>
+                            <a style={{ position: "relative", width: "100%", display:'block', maxWidth:'170px', paddingBottom:'20%' }}>
                                 <Image
                                     src="/images/logo.png"
                                     alt="Logo"
