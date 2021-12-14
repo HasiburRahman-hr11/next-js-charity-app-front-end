@@ -1,0 +1,33 @@
+.header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 8px;
+    z-index: 999;
+}
+
+.navbar{
+    width: 100%;
+    display: block;
+}
+.main__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    justify-content: flex-end;
+}
+
+.menu__item.active {
+    color: #07CC7E;
+}
+
+.menu__item a {
+    padding: 10px 15px;
+    font-weight: 600;
+}
+
+@media only screen and (max-width:990px) {
+    .main__menu {
+        flex-direction: column;
+    }
+}
