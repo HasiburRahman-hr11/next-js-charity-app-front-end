@@ -24,6 +24,8 @@ const counters = [
 const styles = {
     section: {
         background: "linear-gradient(rgba(6,34,101,.55),rgba(6,34,101,.55)), url(/images/counter-bg.jpg)",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
         padding: '100px 0',
         textAlign: 'center'
     },
