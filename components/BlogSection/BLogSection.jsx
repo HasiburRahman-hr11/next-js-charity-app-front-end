@@ -1,35 +1,12 @@
 import React from 'react';
 import { Container, Grid, Box } from '@mui/material';
+
+// Components
 import SectionHeader from '../SectionHeader/SectionHeader';
 import BlogCard from '../BlogCard/BlogCard';
 
-
-const blogs = [
-    {
-        _id: '01',
-        title: 'Many Children are suffering a lot for food.',
-        description: 'Some description text',
-        thumbnail: 'https://images.pexels.com/photos/8078392/pexels-photo-8078392.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        author: 'Mr. Invisible',
-        createdAt: '2021-12-15T14:05:42.138Z'
-    },
-    {
-        _id: '02',
-        title: 'Be soft and kind for the poor people.',
-        description: 'Some description text',
-        thumbnail: 'https://images.pexels.com/photos/7293100/pexels-photo-7293100.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        author: 'Mr. Invisible',
-        createdAt: '2021-12-15T14:05:42.138Z'
-    },
-    {
-        _id: '03',
-        title: 'Be kind for the poor people and the kids.',
-        description: 'Some description text',
-        thumbnail: 'https://images.pexels.com/photos/1125850/pexels-photo-1125850.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-        author: 'Mr. Invisible',
-        createdAt: '2021-12-15T14:05:42.138Z'
-    }
-]
+// Fake Data
+import {blogs} from '../../fakeData';
 
 const BlogSection = () => {
     return (
