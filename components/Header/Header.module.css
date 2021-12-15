@@ -42,10 +42,9 @@
 .menu__close{
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: -20px;
     cursor: pointer;
     border-radius: 50%;
-    display: flex;
     width: 40px;
     height: 40px;
 }
@@ -78,7 +77,7 @@
         display: block;
         width: 100%;
     }
-    .menu__open{
+    .menu__open, .menu__close{
         display: flex;
     }
     .menu__overlay{
