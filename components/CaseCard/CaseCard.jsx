@@ -33,7 +33,7 @@ const styles = {
 const CaseCard = ({ data }) => {
     return (
         <Box component="div" sx={styles.card}>
-            <img src={data.image} alt={data.title} />
+            <img src={data.thumbnail} alt={data.title} />
 
             <Typography variant="h2" component="h2" sx={styles.title}>
                 <Link href={`/cases/${data._id}`}>

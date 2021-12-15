@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 import { Box, Container, Typography } from '@mui/material';
 
-const PageBanner = ({ title, bannerBg }) => {
+const PageBanner = ({ title, bannerBg , breadCumb }) => {
     const router = useRouter();
     return (
         <Box component="div" sx={{
@@ -11,12 +11,18 @@ const PageBanner = ({ title, bannerBg }) => {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition:'center center',
-            padding: '100px 0',
+            padding: {
+                md:'150px 0',
+                sm:'120px 0',
+                xs:'80px 0'
+            },
             textAlign: 'center',
             color: '#fff'
         }}>
             <Container fixed>
-                <Typography variant="h3" component="h3">
+                <Typography variant="h3" component="h3" sx={{
+                    fontSize:'35px'
+                }}>
                     {title}
                 </Typography>
                 <Typography variant="p" component="p" sx={{
@@ -24,9 +30,9 @@ const PageBanner = ({ title, bannerBg }) => {
                     color:'#ddd'
                 }}>
                     <Link href="/">
-                        <a>Home </a>
+                        <a>Home / </a>
                     </Link>
-                    <span style={{color:'var(--primary-color)'}}>{router.pathname ? router.pathname : ''}</span>
+                    <span style={{color:'var(--primary-color)'}}>{breadCumb}</span>
                 </Typography>
             </Container>
         </Box>

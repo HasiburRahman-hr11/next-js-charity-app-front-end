@@ -5,37 +5,37 @@ export const cases = [
     {
         _id: '01',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     },
     {
         _id: '02',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     },
     {
         _id: '03',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     },
     {
         _id: '04',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     },
     {
         _id: '05',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     },
     {
         _id: '06',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     },
     {
         _id: '07',
         title: 'Ensure Education for every poor children',
-        image: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
+        thumbnail: 'https://images.pexels.com/photos/8618062/pexels-photo-8618062.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'
     }
 ];
 
