@@ -27,11 +27,30 @@ const styles = {
         padding: '100px 0',
         textAlign: 'center'
     },
+    item: {
+        position: 'relative',
+        '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: '57px',
+            right: '0',
+            width: '1px',
+            height: '70px',
+            background: '#999',
+            display: {
+                xs: 'none',
+                md: 'block'
+            }
+        },
+        ":last-child::before": {
+            display: "none"
+        }
+    },
     title: {
         fontFamily: "'Oswald', sans-serif",
         fontSize: {
-            sm:'50px',
-            xs:'35px'
+            sm: '50px',
+            xs: '35px'
         },
         marginBottom: '5px',
         fontWeight: '600',
@@ -40,8 +59,8 @@ const styles = {
     text: {
         color: '#999',
         fontSize: {
-            sm:'20px',
-            xs:'18px'
+            sm: '20px',
+            xs: '18px'
         }
     }
 }
@@ -52,25 +71,7 @@ const CounterSection = () => {
             <Container fixed>
                 <Grid container spacing={5}>
                     {counters.map((item, index) => (
-                        <Grid item xs={6} md={3} key={index} sx={{
-                            position: 'relative',
-                            '&::before': {
-                                content: '""',
-                                position: 'absolute',
-                                top: '57px',
-                                right: '0',
-                                width: '1px',
-                                height: '70px',
-                                background: '#636363',
-                                display:{
-                                    xs:'none',
-                                    md:'block'
-                                }
-                            },
-                            ":last-child::before": {
-                                display: "none"
-                            }
-                        }}>
+                        <Grid item xs={6} md={3} key={index} sx={styles.item}>
                             <Box component="div">
                                 <Typography variant="h2" component="h2" sx={styles.title}>
                                     {item.title}+
