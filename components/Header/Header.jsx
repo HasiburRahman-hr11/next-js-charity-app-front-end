@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from "next/router";
 
 import { Container, Grid, Box } from '@mui/material';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 import styles from './Header.module.css';
 
 const Header = () => {
+
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const router = useRouter();
 
@@ -15,11 +18,11 @@ const Header = () => {
         <header className={styles.header}>
             <Container fixed>
                 <Grid container sx={{
-                    alignItems:'center'
+                    alignItems: 'center'
                 }}>
-                    <Grid item xs={6} md={3}>
+                    <Grid item xs={8} md={3}>
                         <Link href='/' >
-                            <a style={{ position: "relative", width: "100%", display:'block', maxWidth:'170px', paddingBottom:'20%' }}>
+                            <a style={{ position: "relative", width: "100%", display: 'block', maxWidth: '170px', paddingBottom: '20%' }}>
                                 <Image
                                     src="/images/logo.png"
                                     alt="Logo"
@@ -29,9 +32,9 @@ const Header = () => {
                             </a>
                         </Link>
                     </Grid>
-                    <Grid item xs={6} md={9}>
-                        <nav className={styles.navbar}>
-                            <ul className={styles.main__menu}>
+                    <Grid item xs={4} md={9}>
+                        <nav className={menuOpen ? `${styles.navbar} ${styles.navbar__active}` : styles.navbar}>
+                            <ul className={styles.main__menu} onClick={() => setMenuOpen(false)}>
                                 <li className={router.pathname == "/" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
                                     <Link href="/">
                                         <a>Home</a>
@@ -63,7 +66,18 @@ const Header = () => {
                                     </Link>
                                 </li>
                             </ul>
+
+                            {/* Toggle Menu Close */}
+                            <span className={styles.menu__close} onClick={() => setMenuOpen(false)}>
+                                <AiOutlineClose />
+                            </span>
                         </nav>
+
+                        {/* Toggle Menu Open */}
+                        <span className={styles.menu__open} onClick={() => setMenuOpen(!menuOpen)}>
+                            <AiOutlineMenu />
+                        </span>
+                        <div className={menuOpen ? `${styles.menu__overlay} ${styles.menu__overlay_active}` : styles.menu__overlay} onClick={() => setMenuOpen(false)}></div>
                     </Grid>
                 </Grid>
             </Container>
