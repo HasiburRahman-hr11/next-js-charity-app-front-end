@@ -13,7 +13,11 @@ const styles = {
         padding: '100px 0'
     },
     title: {
-        fontSize: '70px',
+        fontSize: {
+            md:'70px',
+            sm:'60px',
+            xs:'40px'
+        },
         fontFamily: "'Oswald', sans-serif",
         fontWeight: '700',
         color: 'var(--title-color)',
@@ -60,6 +64,9 @@ const HeroSection = () => {
                 <Grid container>
                     <Grid item xs={12} lg={5}>
                         <Box component="div" sx={{
+                            padding:{
+                                xs:'0 20px'
+                            },
                             paddingTop: { lg: '130px' }
                         }}>
                             <Typography variant='h1' component="h1" sx={styles.title}>

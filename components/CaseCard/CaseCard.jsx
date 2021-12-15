@@ -42,8 +42,7 @@ const CaseCard = ({ data }) => {
             </Typography>
             <Box component="ul" sx={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                listStyle: 'none'
+                justifyContent: 'space-between'
             }}>
                 <Box component="li" sx={styles.btnList}>
                     <Link href={`/cases/${data._id}`}>

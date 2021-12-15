@@ -11,7 +11,11 @@ const styles = {
     title: {
         color: 'var(--title-color)',
         fontFamily: "'Oswald', sans-serif",
-        fontSize: '50px',
+        fontSize: {
+            md:'50px',
+            sm:'40px',
+            xs:'30px'
+        },
         fontWeight: '600'
     },
     subtitle: {
