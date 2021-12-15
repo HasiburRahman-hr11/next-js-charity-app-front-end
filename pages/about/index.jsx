@@ -12,15 +12,13 @@ const About = () => {
             <Head>
                 <title>About | Next Js Website</title>
             </Head>
-            <div className='page about__page'>
-                <PageBanner
-                    title="About Us"
-                    bannerBg="https://images.pexels.com/photos/6994985/pexels-photo-6994985.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                    breadCumb="About"
-                />
-                <MissionSection />
-                <AboutSection/>
-            </div>
+            <PageBanner
+                title="About Us"
+                bannerBg="https://images.pexels.com/photos/6994985/pexels-photo-6994985.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                breadCumb="About"
+            />
+            <MissionSection />
+            <AboutSection />
         </>
     );
 };

@@ -47,11 +47,6 @@ const Header = () => {
                                         <a>Cases</a>
                                     </Link>
                                 </li>
-                                <li className={router.pathname == "/events" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
-                                    <Link href="/events">
-                                        <a>Event</a>
-                                    </Link>
-                                </li>
                                 <li className={router.pathname == "/blogs" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
                                     <Link href="/blogs" >
                                         <a>Blog</a>
