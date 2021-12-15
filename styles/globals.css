@@ -20,7 +20,8 @@ a {
   color: inherit;
   text-decoration: none;
 }
-ul{
+
+ul {
   list-style: none;
 }
 
@@ -30,6 +31,15 @@ input,
 textarea,
 select {
   width: 100%;
+}
+
+input,
+textarea,
+select,
+button {
+  outline: none;
+  border: 0;
+  font-size: 16px;
 }
 
 .btn__primary {
@@ -81,10 +91,11 @@ select {
     background-image: linear-gradient(90deg, #00a7d5, #27cdca);
     color: #fff;
   }
+
   .case__slider .slick-arrow.slick-next {
     right: calc(50% - 40px);
   }
-  
+
   .case__slider .slick-arrow.slick-prev {
     left: calc(50% - 40px);
   }

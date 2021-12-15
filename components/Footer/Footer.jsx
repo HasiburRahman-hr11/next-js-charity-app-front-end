@@ -1,10 +1,17 @@
 import React from 'react';
+import { Container, Grid, Box } from '@mui/material';
+import NewsLetter from '../NewsLetter/NewsLetter';
 
 const Footer = () => {
     return (
-        <footer>
-            <h2>This is Footer</h2>
-        </footer>
+        <Box component="footer" className="footer" sx={{
+            backgroundColor:'#062265',
+            color:'#fff'
+        }}>
+            <Container fixed>
+                <NewsLetter/>
+            </Container>
+        </Box>
     );
 };
 
