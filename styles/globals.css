@@ -42,6 +42,10 @@ button {
   font-size: 16px;
 }
 
+button{
+  cursor: pointer;
+}
+
 .btn__primary {
   background-color: var(--primary-color);
   color: #fff;
@@ -81,6 +85,82 @@ button {
 
 .case__slider .slick-arrow.slick-prev {
   left: -50px;
+}
+
+/* Login and Registration Page */
+.login__page,
+.register__page {
+  background-color: #F7FBFE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.auth__form_wrapper {
+  background-color: #fff;
+  max-width: 500px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  margin: 0 auto;
+}
+
+.auth__form_title {
+  font-family: 'Oswald', sans-serif;
+  color: var(--title-color);
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.auth__form .input__group {
+  margin-bottom: 20px;
+}
+
+.auth__form input {
+  height: 45px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.auth__form .auth__submit {
+  background-color: var(--primary-color);
+  color: #fff;
+  height: 45px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.auth__form .auth__alter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth__form .auth__alter li {
+  margin: 0 15px;
+}
+
+.auth__form .auth__alter li button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e2ecfd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.auth__form .auth__alter li button.google__btn{
+  color: #FF3D00;
+}
+.auth__form .auth__alter li button.facebook__btn{
+  color: #0E88EE;
+}
+.auth__form .auth__alter li button.github__btn{
+  color: #2D333B;
 }
 
 @media only screen and (max-width:768px) {
