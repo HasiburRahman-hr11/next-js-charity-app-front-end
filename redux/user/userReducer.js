@@ -1,12 +1,18 @@
 import { GET_USER_START, GET_USER_SUCCESS, LOGOUT_SUCCESS } from "./userConstants";
 
+const getUser = ()=>{
+    if(typeof window !== "undefined") {
+        if(localStorage.getItem('charitAble-user')) {
+          return JSON.parse(localStorage.getItem('charitAble-user'))
+        } else{
+        return {}
+        }
+     }
+}
+
 
 const initialState = {
-    user: {
-        displayName: '',
-        email: '',
-        token: ''
-    },
+    user: getUser(),
     error: ''
 }
 const userReducer = (state = initialState, action) => {

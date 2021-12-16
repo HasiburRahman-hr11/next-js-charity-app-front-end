@@ -140,3 +140,12 @@ const index = () => {
 };
 
 export default index;
+
+
+index.getLayout = function pageLayout(page) {
+    return (
+        <>
+            {page}
+        </>
+    )
+}

@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import {useSelector} from 'react-redux';
-
-import { Container, Grid, Box } from '@mui/material';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-
 import styles from './Header.module.css';
-import { useFirebase } from '../../hooks/useFirebase';
+
+// Redux
+import {useSelector} from 'react-redux';
+// MUI
+import { Container, Grid, Box } from '@mui/material';
+// React Icons
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+// Components
+import UserMenu from '../UserMenu/UserMenu';
 
 const Header = () => {
 
@@ -16,7 +19,6 @@ const Header = () => {
 
     const router = useRouter();
 
-    const { signOutController} = useFirebase();
     const user = useSelector((state)=> state.userInfo.user);
 
     return (
@@ -39,38 +41,38 @@ const Header = () => {
                     </Grid>
                     <Grid item xs={4} md={9}>
                         <nav className={menuOpen ? `${styles.navbar} ${styles.navbar__active}` : styles.navbar}>
-                            <ul className={styles.main__menu} onClick={() => setMenuOpen(false)}>
-                                <li className={router.pathname == "/" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                            <ul className={styles.main__menu}>
+                                <li className={router.pathname == "/" ? `${styles.menu__item} ${styles.active}` : styles.menu__item} onClick={() => setMenuOpen(false)}>
                                     <Link href="/">
                                         <a>Home</a>
                                     </Link>
                                 </li>
-                                <li className={router.pathname == "/about" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                                <li className={router.pathname == "/about" ? `${styles.menu__item} ${styles.active}` : styles.menu__item} onClick={() => setMenuOpen(false)}>
                                     <Link href="/about">
                                         <a>About</a>
                                     </Link>
                                 </li>
-                                <li className={router.pathname == "/cases" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                                <li className={router.pathname == "/cases" ? `${styles.menu__item} ${styles.active}` : styles.menu__item} onClick={() => setMenuOpen(false)}>
                                     <Link href="/cases">
                                         <a>Cases</a>
                                     </Link>
                                 </li>
-                                <li className={router.pathname == "/blogs" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                                <li className={router.pathname == "/blogs" ? `${styles.menu__item} ${styles.active}` : styles.menu__item} onClick={() => setMenuOpen(false)}>
                                     <Link href="/blogs" >
                                         <a>Blog</a>
                                     </Link>
                                 </li>
-                                <li className={router.pathname == "/contact" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                                <li className={router.pathname == "/contact" ? `${styles.menu__item} ${styles.active}` : styles.menu__item} onClick={() => setMenuOpen(false)}>
                                     <Link href="/contact">
                                         <a>Contact</a>
                                     </Link>
                                 </li>
                                 {user?.email || user?.displayName ? (
-                                    <li className={styles.menu__item} onClick={()=> signOutController()}>
-                                        <span>Logout</span>
+                                    <li className={styles.menu__item}>
+                                        <UserMenu setMenuOpen={setMenuOpen} />
                                     </li>
                                 ) : (
-                                    <li className={router.pathname == "/login" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                                    <li className={router.pathname == "/login" ? `${styles.menu__item} ${styles.active}` : styles.menu__item} onClick={() => setMenuOpen(false)}>
                                         <Link href="/login">
                                             <a>Login</a>
                                         </Link>

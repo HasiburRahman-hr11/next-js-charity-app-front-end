@@ -1,8 +1,8 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-import {useSelector} from 'react-redux';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 
 import { Box, Container, Typography, CircularProgress } from '@mui/material';
@@ -12,7 +12,7 @@ import SignInMethods from '../../components/SignInMethods/SignInMethods';
 const index = () => {
 
     // Firebase functions
-    const {signInWithEmailPassword, loading } = useFirebase();
+    const { signInWithEmailPassword, loading } = useFirebase();
 
     // Redux User State
     const user = useSelector(state => state.userInfo.user)
@@ -30,15 +30,15 @@ const index = () => {
         signInWithEmailPassword(formData.email, formData.password);
     }
 
-    if(user?.email || user?.displayName){
+    if (user?.email || user?.displayName) {
         router.push('/')
     }
 
-    useEffect(()=>{
-        if(user.email || user.displayName){
+    useEffect(() => {
+        if (user.email || user.displayName) {
             router.push('/')
         }
-    },[user])
+    }, [user])
 
     return (
         <>
@@ -92,7 +92,7 @@ const index = () => {
                                 Or Sign In With -
                             </Typography>
 
-                            <SignInMethods/>
+                            <SignInMethods />
 
                             <Typography variant="p" component="p" sx={{
                                 textAlign: 'center',
@@ -114,3 +114,11 @@ const index = () => {
 };
 
 export default index;
+
+index.getLayout = function pageLayout(page) {
+    return (
+        <>
+            {page}
+        </>
+    )
+}

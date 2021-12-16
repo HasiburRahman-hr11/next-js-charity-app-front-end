@@ -28,7 +28,7 @@ export const useFirebase = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
     const [token, setToken] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -147,6 +147,7 @@ export const useFirebase = () => {
      const signOutController = () => {
         signOut(auth).then(() => {
             setUser({});
+            localStorage.removeItem('charitAble-user');
             dispatch(logoutSuccess());
         }).catch((error) => {
             setError(error.message);
@@ -156,7 +157,6 @@ export const useFirebase = () => {
 
     // Check Auth State Change
     useEffect(() => {
-        setLoading(true);
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
@@ -180,8 +180,10 @@ export const useFirebase = () => {
                 const userData = {
                     displayName: user.displayName,
                     email: user.email,
+                    photo:user.photoURL,
                     token: idToken
                 }
+                localStorage.setItem('charitAble-user' , JSON.stringify(userData));
                 dispatch(getUserSuccess(userData));
             })
     }

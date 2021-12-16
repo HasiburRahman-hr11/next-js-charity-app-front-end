@@ -42,8 +42,13 @@ button {
   font-size: 16px;
 }
 
-button{
+button {
   cursor: pointer;
+}
+
+.title {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 600;
 }
 
 .btn__primary {
@@ -154,13 +159,16 @@ button{
   justify-content: center;
   font-size: 24px;
 }
-.auth__form .auth__alter li button.google__btn{
+
+.auth__form .auth__alter li button.google__btn {
   color: #FF3D00;
 }
-.auth__form .auth__alter li button.facebook__btn{
+
+.auth__form .auth__alter li button.facebook__btn {
   color: #0E88EE;
 }
-.auth__form .auth__alter li button.github__btn{
+
+.auth__form .auth__alter li button.github__btn {
   color: #2D333B;
 }
 

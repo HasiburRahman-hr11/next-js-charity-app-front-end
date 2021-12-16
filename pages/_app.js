@@ -13,6 +13,18 @@ import initializeFirebase from '../firebase/firebase.init';
 // initializeFirebase();
 
 function MyApp({ Component, pageProps }) {
+
+  if (Component.getLayout) {
+    return Component.getLayout(
+      <Provider store={store}>
+        <Head>
+          <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"></link>
+        </Head>
+        <Component {...pageProps} />
+      </Provider>
+    )
+  }
+
   return (
     <Provider store={store}>
       <Head>
