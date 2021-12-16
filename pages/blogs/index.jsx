@@ -15,7 +15,7 @@ const Blogs = () => {
     return (
         <>
             <Head>
-                <title>Blogs | Next Js Website</title>
+                <title>Blogs | Charitable Next Js Website</title>
             </Head>
             <PageBanner
                 title="Our Blog"

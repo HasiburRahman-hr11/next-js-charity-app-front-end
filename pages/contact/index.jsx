@@ -58,7 +58,7 @@ const index = () => {
     return (
         <>
             <Head>
-                <title>Contact | Next Js Website</title>
+                <title>Contact | Charitable Next Js Website</title>
             </Head>
             <PageBanner
                 title="Contact Us"

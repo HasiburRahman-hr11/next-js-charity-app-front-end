@@ -1,24 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Box, Container, Typography } from '@mui/material';
-import { AiOutlineGoogle, AiFillGithub } from 'react-icons/ai';
-import { FaFacebookF } from 'react-icons/fa';
+import {useRouter} from 'next/router';
+import {useSelector} from 'react-redux';
+
+
+import { Box, Container, Typography, CircularProgress } from '@mui/material';
+import { useFirebase } from '../../hooks/useFirebase';
+import SignInMethods from '../../components/SignInMethods/SignInMethods';
 
 const index = () => {
+
+    // Firebase functions
+    const {signInWithEmailPassword, loading } = useFirebase();
+
+    // Redux User State
+    const user = useSelector(state => state.userInfo.user)
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
 
+    const router = useRouter();
+
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(formData);
+        signInWithEmailPassword(formData.email, formData.password);
     }
+
+    if(user?.email || user?.displayName){
+        router.push('/')
+    }
+
+    useEffect(()=>{
+        if(user.email || user.displayName){
+            router.push('/')
+        }
+    },[user])
+
     return (
         <>
             <Head>
-                <title>Sign In | Next Js Website</title>
+                <title>Sign In | Charitable Next Js Website</title>
             </Head>
             <Box component="div" className='login__page'>
                 <Container fixed>
@@ -46,12 +71,17 @@ const index = () => {
                                     name='password'
                                     placeholder='password'
                                     required
+                                    minLength="6"
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                 />
                             </div>
                             <button type='submit' className="auth__submit">
-                                Sign In
+                                {loading ? <CircularProgress sx={{
+                                    color: '#fff',
+                                    width: '30px !important',
+                                    height: '30px !important'
+                                }} /> : 'Sign In'}
                             </button>
                             <Typography variant="p" component="p" sx={{
                                 padding: '20px 0',
@@ -62,23 +92,7 @@ const index = () => {
                                 Or Sign In With -
                             </Typography>
 
-                            <ul className="auth__alter">
-                                <li>
-                                    <button type='button' className='google__btn'>
-                                        <AiOutlineGoogle />
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type='button' className='facebook__btn'>
-                                        <FaFacebookF />
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type='button' className='github__btn'>
-                                        <AiFillGithub />
-                                    </button>
-                                </li>
-                            </ul>
+                            <SignInMethods/>
 
                             <Typography variant="p" component="p" sx={{
                                 textAlign: 'center',
@@ -87,8 +101,8 @@ const index = () => {
                             }}>
                                 Don't have an account?
                                 <Link href="/register"><a style={{
-                                    color:'#0E88EE',
-                                    marginLeft:'5px'
+                                    color: '#0E88EE',
+                                    marginLeft: '5px'
                                 }}>Sign Up.</a></Link>
                             </Typography>
                         </form>

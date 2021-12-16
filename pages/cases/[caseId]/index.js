@@ -56,7 +56,7 @@ const index = () => {
     return (
         <>
             <Head>
-                <title>{singleCase?.title} | Next Js Website</title>
+                <title>{singleCase?.title} | Charitable Next Js Website</title>
             </Head>
             <PageBanner
                 title="Case Details"

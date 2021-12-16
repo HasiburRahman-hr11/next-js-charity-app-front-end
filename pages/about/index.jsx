@@ -10,7 +10,7 @@ const About = () => {
     return (
         <>
             <Head>
-                <title>About | Next Js Website</title>
+                <title>About | Charitable Next Js Website</title>
             </Head>
             <PageBanner
                 title="About Us"

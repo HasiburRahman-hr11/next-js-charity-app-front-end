@@ -24,7 +24,7 @@ const socials = [
 const FooterCompanyInfo = () => {
     return (
         <>
-            <img src="/images/logo.png" alt="Logo" style={{ maxWidth: '150px', objectFit: 'cover' }} />
+            <img src="/images/logo-white.png" alt="Logo" style={{ maxWidth: '150px', objectFit: 'cover' }} />
 
             <Typography variant="p" component="p" sx={{
                 lineHeight: '25px',

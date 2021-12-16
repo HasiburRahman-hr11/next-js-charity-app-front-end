@@ -21,9 +21,10 @@
     color: var(--primary-color);
 }
 
-.menu__item a {
+.menu__item a , .menu__item span {
     padding: 10px 15px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .menu__open , .menu__close{
@@ -72,7 +73,7 @@
     .menu__item{
         margin-bottom: 10px;
     }
-    .menu__item a {
+    .menu__item a , .menu__item span {
         padding: 10px 15px;
         display: block;
         width: 100%;

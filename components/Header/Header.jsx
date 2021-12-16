@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from "next/router";
+import {useSelector} from 'react-redux';
 
 import { Container, Grid, Box } from '@mui/material';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 import styles from './Header.module.css';
+import { useFirebase } from '../../hooks/useFirebase';
 
 const Header = () => {
 
-    const [menuOpen, setMenuOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const router = useRouter();
+
+    const { signOutController} = useFirebase();
+    const user = useSelector((state)=> state.userInfo.user);
 
     return (
         <header className={styles.header}>
@@ -60,11 +65,18 @@ const Header = () => {
                                         <a>Contact</a>
                                     </Link>
                                 </li>
-                                <li className={router.pathname == "/login" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
-                                    <Link href="/login">
-                                        <a>Login</a>
-                                    </Link>
-                                </li>
+                                {user?.email || user?.displayName ? (
+                                    <li className={styles.menu__item} onClick={()=> signOutController()}>
+                                        <span>Logout</span>
+                                    </li>
+                                ) : (
+                                    <li className={router.pathname == "/login" ? `${styles.menu__item} ${styles.active}` : styles.menu__item}>
+                                        <Link href="/login">
+                                            <a>Login</a>
+                                        </Link>
+                                    </li>
+                                )}
+
                             </ul>
 
                             {/* Toggle Menu Close */}
