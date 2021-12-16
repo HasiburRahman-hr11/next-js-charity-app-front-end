@@ -160,11 +160,10 @@ export const useFirebase = () => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
-                setLoading(false);
                 // console.log(user);
-
                 // Get AccessToken
                 setIdToken(user);
+                setLoading(false);
             } else {
                 setLoading(false);
             }

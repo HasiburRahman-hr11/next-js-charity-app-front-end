@@ -3,6 +3,7 @@ import { Box, Container, Typography } from '@mui/material';
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 
 const index = () => {
+    
     return (
         <>
             <DashboardHeader />

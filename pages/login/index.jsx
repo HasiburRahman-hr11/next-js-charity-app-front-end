@@ -31,12 +31,12 @@ const index = () => {
     }
 
     if (user?.email || user?.displayName) {
-        router.push('/')
+        router.push('/profile')
     }
 
     useEffect(() => {
         if (user.email || user.displayName) {
-            router.push('/')
+            router.push('/profile')
         }
     }, [user])
 

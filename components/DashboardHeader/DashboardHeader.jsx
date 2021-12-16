@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+
 import styles from './DashboardHeader.module.css'
 import { Box, Container, Grid } from '@mui/material';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
+// React Icons
+import { AiOutlineMenu, AiOutlineClose, AiFillFileAdd } from 'react-icons/ai';
+import { FaKhanda, FaBloggerB, FaUserAlt } from 'react-icons/fa';
+import { MdExitToApp } from 'react-icons/md'
+import { useFirebase } from '../../hooks/useFirebase';
 
+import Loading from '../Loading/Loading';
 
 const DashboardHeader = () => {
-
     const [menuOpen, setMenuOpen] = useState(false);
+    // const [loading, setLoading] = useState(true);
+
+    // Firebase functions
+    const { signOutController, loading } = useFirebase();
+
+    // Redux User State
+    const user = useSelector(state => state.userInfo.user);
+    const router = useRouter();
+
+    if (loading) {
+        return <Loading />
+    }
+
+    if (!user?.email || !user?.displayName) {
+        router.push('/login')
+    }
+
 
     return (
         <Box component="div" className={styles.dashboard__header}>
@@ -33,24 +56,40 @@ const DashboardHeader = () => {
             </Container>
 
             <div className={menuOpen ? `${styles.dashboard__sidebar} ${styles.active}` : styles.dashboard__sidebar}>
-                <ul className={styles.dashboard__sidebar_menu}>
-                    <li>
-                        <Link href="/"><a>Cases</a></Link>
+                <ul className={styles.dashboard__sidebar_menu} >
+                    <li onClick={() => setMenuOpen(false)}>
+                        <Link href="/"><a>
+                            <span className={styles.list__icon}><FaKhanda /></span> Cases
+                        </a></Link>
                     </li>
-                    <li>
-                        <Link href="/"><a>Add Case</a></Link>
+                    <li onClick={() => setMenuOpen(false)}>
+                        <Link href="/"><a>
+                            <span className={styles.list__icon}><AiFillFileAdd /></span> Add Case
+                        </a></Link>
                     </li>
-                    <li>
-                        <Link href="/"><a>Blogs</a></Link>
+                    <li onClick={() => setMenuOpen(false)}>
+                        <Link href="/"><a>
+                            <span className={styles.list__icon}><FaBloggerB /></span> Blogs
+                        </a></Link>
                     </li>
-                    <li>
-                        <Link href="/"><a>Add Blog</a></Link>
+                    <li onClick={() => setMenuOpen(false)}>
+                        <Link href="/"><a>
+                            <span className={styles.list__icon}><AiFillFileAdd /></span> Add Blog
+                        </a></Link>
                     </li>
-                    <li>
-                        <Link href="/"><a>Users</a></Link>
+                    <li onClick={() => setMenuOpen(false)}>
+                        <Link href="/"><a>
+                            <span className={styles.list__icon}><FaUserAlt /></span> Users
+                        </a></Link>
                     </li>
-                    <li>
-                        <span>Logout</span>
+                    <li onClick={() => {
+                        setMenuOpen(false);
+                        signOutController();
+                    }}>
+                        <div>
+                            <span className={styles.list__icon}><MdExitToApp /></span>
+                            Logout
+                        </div>
                     </li>
                 </ul>
 

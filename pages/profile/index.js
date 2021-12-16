@@ -1,4 +1,5 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+
 import { Box, Container, Grid, Typography } from '@mui/material';
 
 import Loading from '../../components/Loading/Loading';
@@ -15,11 +16,14 @@ const index = () => {
     const user = useSelector((state) => state.userInfo.user);
 
     const {loading} = useFirebase();
+    const router = useRouter();
 
-    console.log(user);
-
-    if(loading){
+    if (loading) {
         return <Loading />
+    }
+
+    if (!user?.email || !user?.displayName) {
+        router.push('/login')
     }
 
     return (
@@ -37,27 +41,27 @@ const index = () => {
                 }}>
                     <Grid container spacing={5}>
                         <Grid item md={4} sm={5} xs={12} sx={{
-                            textAlign:{
-                                xs:'center',
-                                sm:'left'
+                            textAlign: {
+                                xs: 'center',
+                                sm: 'left'
                             }
                         }}>
                             <img src={user?.photo ? user.photo : '/images/avatar.png'} alt="User" style={{
-                                maxWidth:'150px',
-                                borderRadius:'50%'
+                                maxWidth: '150px',
+                                borderRadius: '50%'
                             }} />
                         </Grid>
                         <Grid item md={8} sm={7} xs={12}>
                             <Typography variant="h2" component="h2" sx={{
                                 fontFamily: "'Oswald', sans-serif",
                                 fontSize: {
-                                    xs:'20px',
-                                    md:'25px'
+                                    xs: '20px',
+                                    md: '25px'
                                 },
                                 fontWeight: '600',
-                                marginBottom:'30px'
+                                marginBottom: '30px'
                             }}>
-                                Welcome <span style={{color: 'var(--title-color)'}}>{user?.displayName}</span>
+                                Welcome <span style={{ color: 'var(--title-color)' }}>{user?.displayName}</span>
                             </Typography>
                         </Grid>
                     </Grid>
