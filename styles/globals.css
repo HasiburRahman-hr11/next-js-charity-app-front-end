@@ -46,6 +46,10 @@ button {
   cursor: pointer;
 }
 
+label {
+  display: block;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -71,6 +75,19 @@ input[type=number] {
   transition: all .3s;
   border: none;
   font-size: 18px;
+}
+
+.icon__wrapper_primary {
+  width: 35px;
+  height: 35px;
+  background-color: var(--primary-color);
+  font-size: 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .case__slider .slick-arrow {
@@ -181,6 +198,67 @@ input[type=number] {
 .auth__form .auth__alter li button.github__btn {
   color: #2D333B;
 }
+
+
+/* Dashboard */
+/* Draft Editor */
+.draft__editor {
+  border: 1px solid #ddd;
+  min-height: 200px;
+  padding: 0 10px;
+}
+
+.admin__input {
+  border: 1px solid #eee;
+  padding: 10px;
+  height: 45px;
+}
+
+.admin__label {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #444;
+}
+
+.admin__thumb_preview {
+  max-width: 350px;
+  min-width: 220px;
+  object-fit: cover;
+  min-height: 150px;
+  max-height: 250px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.admin__add_thumbnail,
+.admin__remove_thumbnail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dceaf7;
+  color: #333;
+  height: 45px;
+  padding: 10px 25px;
+  border-radius: 3px;
+  max-width: 170px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin__add_thumbnail{
+  margin-right: 15px;
+}
+.admin__remove_thumbnail{
+  background-color: #ddd;
+}
+
+.admin__add_thumbnail span {
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-right: 5px;
+}
+
 
 @media only screen and (max-width:768px) {
   .case__slider .slick-arrow {

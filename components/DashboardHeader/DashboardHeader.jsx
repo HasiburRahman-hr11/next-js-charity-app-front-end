@@ -58,27 +58,27 @@ const DashboardHeader = () => {
             <div className={menuOpen ? `${styles.dashboard__sidebar} ${styles.active}` : styles.dashboard__sidebar}>
                 <ul className={styles.dashboard__sidebar_menu} >
                     <li onClick={() => setMenuOpen(false)}>
-                        <Link href="/"><a>
+                        <Link href="/dashboard/cases"><a>
                             <span className={styles.list__icon}><FaKhanda /></span> Cases
                         </a></Link>
                     </li>
                     <li onClick={() => setMenuOpen(false)}>
-                        <Link href="/"><a>
+                        <Link href="/dashboard/add-case"><a>
                             <span className={styles.list__icon}><AiFillFileAdd /></span> Add Case
                         </a></Link>
                     </li>
                     <li onClick={() => setMenuOpen(false)}>
-                        <Link href="/"><a>
+                        <Link href="/dashboard/blogs"><a>
                             <span className={styles.list__icon}><FaBloggerB /></span> Blogs
                         </a></Link>
                     </li>
                     <li onClick={() => setMenuOpen(false)}>
-                        <Link href="/"><a>
+                        <Link href="/dashboard/add-blog"><a>
                             <span className={styles.list__icon}><AiFillFileAdd /></span> Add Blog
                         </a></Link>
                     </li>
                     <li onClick={() => setMenuOpen(false)}>
-                        <Link href="/"><a>
+                        <Link href="/dashboard/users"><a>
                             <span className={styles.list__icon}><FaUserAlt /></span> Users
                         </a></Link>
                     </li>

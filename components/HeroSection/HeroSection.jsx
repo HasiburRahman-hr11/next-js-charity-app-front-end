@@ -82,7 +82,7 @@ const HeroSection = () => {
                             <Typography variant='p' component="p" sx={styles.text}>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate perferendis sapiente aut.
                             </Typography>
-                            <Link href="/cases">
+                            <Link href="/donate">
                                 <a className='btn__primary'>Donate Now</a>
                             </Link>
                         </Box>

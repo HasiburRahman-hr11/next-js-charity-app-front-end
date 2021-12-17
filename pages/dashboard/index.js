@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Box, Container, Typography } from '@mui/material';
 import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 
@@ -6,6 +7,9 @@ const index = () => {
     
     return (
         <>
+        <Head>
+            <title>Dashboard | CharitAble Next Js Website</title>
+        </Head>
             <DashboardHeader />
             <Box component="div" sx={{
                 // padding: '70px 0'
