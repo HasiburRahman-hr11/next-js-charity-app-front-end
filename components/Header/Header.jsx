@@ -19,7 +19,7 @@ const Header = () => {
 
     const router = useRouter();
 
-    const user = useSelector((state)=> state.userInfo.user);
+    const user = useSelector((state)=> state.auth.user);
 
     return (
         <header className={styles.header}>

@@ -15,7 +15,7 @@ const index = () => {
     const { signInWithEmailPassword, loading } = useFirebase();
 
     // Redux User State
-    const user = useSelector(state => state.userInfo.user)
+    const user = useSelector(state => state.auth.user)
 
     const [formData, setFormData] = useState({
         email: '',
@@ -27,16 +27,12 @@ const index = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(formData);
-        signInWithEmailPassword(formData.email, formData.password);
-    }
-
-    if (user?.email || user?.displayName) {
-        router.push('/profile')
+        signInWithEmailPassword(formData.email, formData.password , router);
     }
 
     useEffect(() => {
         if (user.email || user.displayName) {
-            router.push('/profile')
+            router.push('/')
         }
     }, [user])
 

@@ -1,4 +1,4 @@
-import {GET_USER_FAILED, GET_USER_START, GET_USER_SUCCESS , LOGOUT_SUCCESS} from './userConstants';
+import {GET_USER_FAILED, GET_USER_START, GET_USER_SUCCESS , LOGOUT_SUCCESS} from './authConstants';
 
 export const getUserStart = () => ({type:GET_USER_START});
 export const getUserSuccess = (user) => ({type:GET_USER_SUCCESS , payload:user});

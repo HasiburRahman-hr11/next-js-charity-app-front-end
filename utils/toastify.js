@@ -1,4 +1,4 @@
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const successNotify = (msg) => toast.success(msg, {
     position: "top-right",
@@ -11,12 +11,11 @@ export const successNotify = (msg) => toast.success(msg, {
 });
 
 export const errorNotify = (msg) => toast.error(msg, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: true,
+    position: "top-left",
+    autoClose: 2000,
+    hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
 });
-

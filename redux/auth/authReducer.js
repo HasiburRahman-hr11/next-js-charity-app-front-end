@@ -1,4 +1,4 @@
-import { GET_USER_START, GET_USER_SUCCESS, LOGOUT_SUCCESS } from "./userConstants";
+import { GET_USER_START, GET_USER_SUCCESS, LOGOUT_SUCCESS } from "./authConstants";
 
 const getUser = ()=>{
     if(typeof window !== "undefined") {

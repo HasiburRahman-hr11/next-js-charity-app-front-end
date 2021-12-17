@@ -1,35 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Box, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-
-import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader';
-
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 
+import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader';
+import Loading from '../../../components/Loading/Loading';
 
-const users = [
-    {
-        name: 'John Doe',
-        email: 'john@doe.com',
-        role: 'Subscriber'
-    },
-    {
-        name: 'John Doe',
-        email: 'john@doe.com',
-        role: 'Subscriber'
-    },
-    {
-        name: 'John Doe',
-        email: 'john@doe.com',
-        role: 'Subscriber'
-    },
-    {
-        name: 'John Doe',
-        email: 'john@doe.com',
-        role: 'Subscriber'
-    },
-];
+import { deleteUser, getAllUsers } from '../../../redux/users/apiCalls';
+import { useState } from 'react';
 
 const styles = {
     icon: {
@@ -41,11 +23,31 @@ const styles = {
         backgroundColor: '#F7FBFE',
         borderRadius: '50%',
         fontSize: '22px',
-        cursor:'pointer'
+        cursor: 'pointer'
     }
 }
 
 const index = () => {
+
+
+    const dispatch = useDispatch();
+    const userState = useSelector(state => state.users);
+
+    useEffect(() => {
+        getAllUsers(dispatch);
+    }, []);
+
+    const handleDeleteUser = (id) => {
+        const isAgree = window.confirm('Confirm delete user?');
+        if (isAgree) {
+            deleteUser(dispatch, id)
+        }
+    }
+
+    if (userState.isFetching) {
+        return <Loading />
+    }
+
     return (
         <>
             <Head>
@@ -81,7 +83,7 @@ const index = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {users.map((user) => (
+                                {userState.users.map((user) => (
                                     <TableRow
                                         key={user.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -92,10 +94,12 @@ const index = () => {
                                         <TableCell align="left">{user.email}</TableCell>
                                         <TableCell align="left">{user.role}</TableCell>
                                         <TableCell align="left">
-                                            <span style={{...styles.icon, color:'#666'}}><FiEdit /></span>
+                                            <Link href={`/dashboard/users/edit/${user._id}`}>
+                                                <a style={{ ...styles.icon, color: '#666' }}><FiEdit /></a>
+                                            </Link>
                                         </TableCell>
                                         <TableCell align="left">
-                                            <span style={{...styles.icon, color:'#DD5044'}}><AiOutlineDelete /></span>
+                                            <span style={{ ...styles.icon, color: '#DD5044' }} onClick={() => handleDeleteUser(user._id)}><AiOutlineDelete /></span>
                                         </TableCell>
                                     </TableRow>
                                 ))}

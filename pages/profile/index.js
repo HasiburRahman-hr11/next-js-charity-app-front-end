@@ -9,21 +9,29 @@ import { useSelector } from 'react-redux';
 
 // Firebase
 import { useFirebase } from '../../hooks/useFirebase';
+import { useEffect } from 'react';
 
 const index = () => {
 
     // Redux
-    const user = useSelector((state) => state.userInfo.user);
+    const user = useSelector((state) => state.auth.user);
 
-    const {loading} = useFirebase();
+    const { loading } = useFirebase();
     const router = useRouter();
+
+    
+
+    // if (!user?.email || !user?.displayName) {
+    //     router.push('/login')
+    // }
+    useEffect(() => {
+        if (!user?.email || !user?.displayName) {
+            router.push('/login')
+        }
+    }, [user]);
 
     if (loading) {
         return <Loading />
-    }
-
-    if (!user?.email || !user?.displayName) {
-        router.push('/login')
     }
 
     return (

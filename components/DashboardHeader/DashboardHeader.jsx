@@ -22,7 +22,7 @@ const DashboardHeader = () => {
     const { signOutController, loading } = useFirebase();
 
     // Redux User State
-    const user = useSelector(state => state.userInfo.user);
+    const user = useSelector(state => state.auth.user);
     const router = useRouter();
 
     if (loading) {

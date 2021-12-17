@@ -20,7 +20,7 @@ import { useFirebase } from '../../hooks/useFirebase';
 
 
 const styles = {
-    muiMenu : {
+    muiMenu: {
         overflow: 'visible',
         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
         mt: 1.5,
@@ -71,13 +71,13 @@ const UserMenu = ({ setMenuOpen }) => {
     };
 
     // Redux
-    const user = useSelector((state) => state.userInfo.user);
+    const user = useSelector((state) => state.auth.user);
 
     const { signOutController } = useFirebase();
 
     return (
         <>
-            <Tooltip title="Account settings">
+            <Tooltip title="Account Settings">
                 <IconButton onClick={handleUserMenuClick} size="small" sx={{ ml: 2 }}>
                     <Avatar sx={{ width: 32, height: 32 }}>
                         {user?.displayName && user?.displayName?.substr(0, 1)}
@@ -107,17 +107,19 @@ const UserMenu = ({ setMenuOpen }) => {
                         </a>
                     </Link >
                 </MenuItem>
-                <MenuItem onClick={() => setMenuOpen(false)}>
-                    <Link href="/dashboard" style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%'
-                    }}>
-                        <a style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={styles.reactIcons}><AiFillDashboard /></span> Dashboard
-                        </a>
-                    </Link >
-                </MenuItem>
+                {user.isAdmin && (
+                    <MenuItem onClick={() => setMenuOpen(false)}>
+                        <Link href="/dashboard" style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: '100%'
+                        }}>
+                            <a style={{ display: 'flex', alignItems: 'center' }}>
+                                <span style={styles.reactIcons}><AiFillDashboard /></span> Dashboard
+                            </a>
+                        </Link >
+                    </MenuItem>
+                )}
                 <Divider />
 
 

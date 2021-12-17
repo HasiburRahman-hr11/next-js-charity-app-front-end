@@ -15,7 +15,7 @@ const index = () => {
     // Firebase 
     const { signUpWithEmailPassword, loading } = useFirebase();
     // Redux User State
-    const user = useSelector(state => state.userInfo.user)
+    const user = useSelector(state => state.auth.user)
 
     const [formData, setFormData] = useState({
         name: '',
@@ -30,19 +30,15 @@ const index = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         if(formData.password === formData.confirmPassword){
-            signUpWithEmailPassword(formData.name, formData.email, formData.password);
+            signUpWithEmailPassword(formData.name, formData.email, formData.password , router);
         }else{
             errorNotify('Password is not matching!')
         }
     }
 
-    if (user?.email || user?.displayName) {
-        router.push('/profile')
-    }
-
     useEffect(() => {
-        if (user?.email || user?.displayName) {
-            router.push('/profile')
+        if (user.email || user.displayName) {
+            router.push('/')
         }
     }, [user])
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -16,18 +17,23 @@ import initializeFirebase from "../firebase/firebase.init";
 
 // Redux
 import { useDispatch } from 'react-redux';
-import { getUserSuccess, logoutSuccess } from "../redux/user/userActions";
+import { getUserSuccess, logoutSuccess } from "../redux/auth/authActions";
 
 // Toastify
-import {errorNotify, successNotify} from '../utils/toastify';
+import { errorNotify, successNotify } from '../utils/toastify';
 
 initializeFirebase();
 
 
 export const useFirebase = () => {
-    const [user, setUser] = useState({});
+    const [userInfo, setUserInfo] = useState({
+        displayName: '',
+        email: '',
+        photo: '',
+        token: '',
+        isAdmin: false
+    });
     const [error, setError] = useState('');
-    const [token, setToken] = useState('');
     const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
@@ -38,24 +44,31 @@ export const useFirebase = () => {
     const githubProvider = new GithubAuthProvider();
 
     // Sign Up with email and password
-    const signUpWithEmailPassword = (name, email, password) => {
-        setLoading(true);
+    const signUpWithEmailPassword = (name, email, password, router) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
-                // Signed in 
-                setUser({
-                    email: email,
+                // save user info
+                setUserInfo({
+                    ...userInfo,
                     displayName: name,
-                });
+                    email: email
+                })
 
-                successNotify('Registration Successful');
+                // Save User To Database
+                const userData = {
+                    displayName: name,
+                    email: email,
+                }
+
+
 
                 // Update user profile to Firebase
-                updateProfile(auth.currentUser, {
-                    email: email,
-                    displayName: name,
-                }).then(() => {
+                updateProfile(auth.currentUser, userData).then(() => {
+                    saveUserToDb(userData);
+                    setAdmin(userData);
 
+                    router.push('/profile')
+                    successNotify('Registration Successful');
                 }).catch((error) => {
                     console.log(error)
                 });
@@ -71,13 +84,22 @@ export const useFirebase = () => {
     };
 
     // Sign In with email and password
-    const signInWithEmailPassword = (email, password) => {
+    const signInWithEmailPassword = (email, password, router) => {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 // Signed in 
                 const user = result.user;
-                setUser(user);
+                setUserInfo({
+                    ...userInfo,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                })
+
+                // Save User To Database
+                saveUserToDb(user);
+                router.push('/profile')
 
                 successNotify('Successfully Logged In');
 
@@ -91,14 +113,24 @@ export const useFirebase = () => {
             });
     }
 
-   
+
     // Google Sign In
     const signInWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 // The signed-in user info.
                 const user = result.user;
-                setUser(user);
+
+                setUserInfo({
+                    ...userInfo,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                })
+
+                // Save User To Database
+                saveUserToDb(user);
+
                 setError('');
                 setLoading(false);
             }).catch((error) => {
@@ -115,7 +147,16 @@ export const useFirebase = () => {
             .then((result) => {
                 // The signed-in user info.
                 const user = result.user;
-                setUser(user);
+                setUserInfo({
+                    ...userInfo,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                })
+
+                // Save User To Database
+                saveUserToDb(user);
+
                 setError('');
                 setLoading(false);
             }).catch((error) => {
@@ -132,7 +173,16 @@ export const useFirebase = () => {
             .then((result) => {
                 // The signed-in user info.
                 const user = result.user;
-                setUser(user);
+                setUserInfo({
+                    ...userInfo,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                })
+
+                // Save User To Database
+                saveUserToDb(user);
+
                 setError('');
                 setLoading(false);
             }).catch((error) => {
@@ -143,10 +193,9 @@ export const useFirebase = () => {
             });
     }
 
-     // Sign Out
-     const signOutController = () => {
+    // Sign Out
+    const signOutController = () => {
         signOut(auth).then(() => {
-            setUser({});
             localStorage.removeItem('charitAble-user');
             dispatch(logoutSuccess());
         }).catch((error) => {
@@ -157,12 +206,19 @@ export const useFirebase = () => {
 
     // Check Auth State Change
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
-                setUser(user);
                 // console.log(user);
-                // Get AccessToken
+                setUserInfo({
+                    ...userInfo,
+                    displayName: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                })
+
+                // Set AccessToken
                 setIdToken(user);
+
                 setLoading(false);
             } else {
                 setLoading(false);
@@ -172,25 +228,46 @@ export const useFirebase = () => {
     }, []);
 
 
+    // Set the user access token  
     const setIdToken = (user) => {
         getIdToken(user)
             .then((idToken) => {
-                setToken(idToken);
-                const userData = {
-                    displayName: user.displayName,
-                    email: user.email,
-                    photo:user.photoURL,
-                    token: idToken
-                }
-                localStorage.setItem('charitAble-user' , JSON.stringify(userData));
-                dispatch(getUserSuccess(userData));
+                setUserInfo({ ...userInfo, token: idToken });
+
+                setAdmin(user, idToken);
             })
     }
 
+    const setAdmin = async (user, idToken = '') => {
+        const userData = {
+            displayName: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+            token: idToken ? idToken : '',
+            isAdmin: false
+        }
+        const res = await axios.get(`http://localhost:8000/users/${user.email}`);
+        if (res.data?.role === 'admin') {
+            userData.isAdmin = true;
+            localStorage.setItem('charitAble-user', JSON.stringify(userData));
+            dispatch(getUserSuccess(userData));
+        } else {
+            localStorage.setItem('charitAble-user', JSON.stringify(userData));
+            dispatch(getUserSuccess(userData));
+        }
+    }
+
+    // Save User to DataBase
+    const saveUserToDb = async (user) => {
+        try {
+            const { data } = await axios.post('http://localhost:8000/users/create', { name: user.displayName, email: user.email });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
-        user,
-        token,
-        setUser,
         loading,
         setLoading,
         error,
