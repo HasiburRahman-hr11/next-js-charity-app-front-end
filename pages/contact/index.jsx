@@ -34,9 +34,7 @@ const styles = {
         boxShadow: 'rgba(0, 0, 0, 0.1) -4px 9px 25px -6px'
     },
     cardTitle: {
-        fontFamily: "'Oswald', sans-serif",
         fontSize: '22px',
-        fontWeight: '600',
         color: 'var(--title-color)',
         marginBottom: '30px'
     },
@@ -94,7 +92,9 @@ const index = () => {
                             {contactCardsData.map((item, index) => (
                                 <Grid item xs={12} sm={6} md={4} key={index}>
                                     <Box component="div" sx={styles.card}>
-                                        <Typography variant="h4" component="h4" sx={styles.cardTitle}>
+                                        <Typography variant="h4" component="h4"
+                                        className='title'
+                                        sx={styles.cardTitle}>
                                             {item.title}
                                         </Typography>
                                         <Box component="div" sx={{

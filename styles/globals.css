@@ -46,6 +46,16 @@ button {
   cursor: pointer;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .title {
   font-family: 'Oswald', sans-serif !important;
   font-weight: 600;
@@ -118,7 +128,7 @@ button {
   font-size: 25px;
 }
 
-.auth__form .input__group {
+.input__group {
   margin-bottom: 20px;
 }
 
