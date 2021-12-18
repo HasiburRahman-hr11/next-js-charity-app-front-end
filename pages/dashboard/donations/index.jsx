@@ -28,7 +28,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const Donations = () => {
 
 
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const index = () => {
 
     useEffect(() => {
         getAllDonations(dispatch);
-    }, []);
+    }, [dispatch]);
 
     const handleDeleteDonation = (id) => {
         const isAgree = window.confirm('Confirm delete donation?');
@@ -121,9 +121,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default Donations;
 
-index.getLayout = function pageLayout(page) {
+Donations.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

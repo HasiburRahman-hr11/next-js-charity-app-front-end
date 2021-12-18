@@ -10,7 +10,7 @@ import { useFirebase } from '../../hooks/useFirebase';
 import SignInMethods from '../../components/SignInMethods/SignInMethods';
 import { errorNotify } from '../../utils/toastify';
 
-const index = () => {
+const Register = () => {
 
     // Firebase 
     const { signUpWithEmailPassword, loading } = useFirebase();
@@ -40,7 +40,7 @@ const index = () => {
         if (user.email || user.displayName) {
             router.push('/')
         }
-    }, [user])
+    }, [user,router])
 
     return (
         <>
@@ -135,10 +135,10 @@ const index = () => {
     );
 };
 
-export default index;
+export default Register;
 
 
-index.getLayout = function pageLayout(page) {
+Register.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

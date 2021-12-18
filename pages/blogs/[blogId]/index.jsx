@@ -20,7 +20,7 @@ const styles = {
     },
 }
 
-const index = () => {
+const SingleBlog = () => {
     const [blog, setBlog] = useState({});
     const [loading, setLoading] = useState(true);
     const { query } = useRouter();
@@ -84,4 +84,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default SingleBlog;

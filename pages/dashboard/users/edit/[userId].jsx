@@ -31,7 +31,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const EditUser = () => {
     const [userInfo, setUserInfo] = useState({
         name: '',
         email: '',
@@ -151,9 +151,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default EditUser;
 
-index.getLayout = function pageLayout(page) {
+EditUser.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

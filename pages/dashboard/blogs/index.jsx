@@ -9,7 +9,7 @@ import AdminRoute from '../../../utils/AdminRoute';
 import Loading from '../../../components/Loading/Loading';
 import { deleteBlog, getAllBlogs } from '../../../redux/blogs/apiCalls';
 
-const index = () => {
+const AdminBlogs = () => {
 
     const dispatch = useDispatch();
     const { blogs, isFetching } = useSelector(state => state.blogs);
@@ -23,7 +23,7 @@ const index = () => {
 
     useEffect(() => {
         getAllBlogs(dispatch);
-    }, []);
+    }, [dispatch]);
 
     if (isFetching) {
         return <Loading />
@@ -64,9 +64,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default AdminBlogs;
 
-index.getLayout = function pageLayout(page) {
+AdminBlogs.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

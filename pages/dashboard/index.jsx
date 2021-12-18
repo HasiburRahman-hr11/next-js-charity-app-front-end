@@ -5,7 +5,7 @@ import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
 
 import AdminRoute from '../../utils/AdminRoute';
 
-const index = () => {
+const Dashboard = () => {
 
     return (
         <AdminRoute>
@@ -37,9 +37,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default Dashboard;
 
-index.getLayout = function pageLayout(page) {
+Dashboard.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

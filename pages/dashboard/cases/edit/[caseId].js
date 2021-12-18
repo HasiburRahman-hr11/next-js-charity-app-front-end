@@ -35,7 +35,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const EditCase = () => {
 
     const [title, setTitle] = useState('');
     const [defaultValue, setDefaultValue] = useState('');
@@ -178,9 +178,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default EditCase;
 
-index.getLayout = function pageLayout(page) {
+EditCase.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

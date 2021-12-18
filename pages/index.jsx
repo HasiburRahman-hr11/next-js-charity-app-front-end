@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     getAllCases(dispatch);
     getAllBlogs(dispatch);
-  }, []);
+  }, [dispatch]);
 
 
   if (isFetching || blogFetching) {

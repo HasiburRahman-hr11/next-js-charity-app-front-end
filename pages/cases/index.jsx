@@ -10,7 +10,7 @@ import Loading from '../../components/Loading/Loading';
 import CaseCard from '../../components/CaseCard/CaseCard';
 
 
-const index = () => {
+const Cases = () => {
 
     const { cases, isFetching } = useSelector(state => state.cases)
     if (isFetching) {
@@ -65,4 +65,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Cases;

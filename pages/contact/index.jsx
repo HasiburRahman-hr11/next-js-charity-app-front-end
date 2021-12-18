@@ -52,7 +52,7 @@ const styles = {
     },
 }
 
-const index = () => {
+const Contact = () => {
     return (
         <>
             <Head>
@@ -118,4 +118,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Contact;

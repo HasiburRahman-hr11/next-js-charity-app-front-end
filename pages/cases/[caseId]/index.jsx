@@ -31,7 +31,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const SingleCase = () => {
     const [singleCase, setSingleCase] = useState({});
     const [loading, setLoading] = useState(true);
     const { query } = useRouter();
@@ -100,4 +100,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default SingleCase;

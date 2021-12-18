@@ -10,7 +10,7 @@ import AdminRoute from '../../../utils/AdminRoute';
 import { deleteCase, getAllCases } from '../../../redux/cases/apiCalls';
 import Loading from '../../../components/Loading/Loading';
 
-const index = () => {
+const AdminCases = () => {
 
     const dispatch = useDispatch();
     const {cases , isFetching} = useSelector(state => state.cases);
@@ -24,7 +24,7 @@ const index = () => {
 
     useEffect(() => {
         getAllCases(dispatch);
-    }, []);
+    }, [dispatch]);
 
     if(isFetching){
         return <Loading />
@@ -65,9 +65,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default AdminCases;
 
-index.getLayout = function pageLayout(page) {
+AdminCases.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

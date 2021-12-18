@@ -34,7 +34,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const EditBlog = () => {
 
     const [title, setTitle] = useState('');
     const [defaultValue, setDefaultValue] = useState('');
@@ -176,9 +176,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default EditBlog;
 
-index.getLayout = function pageLayout(page) {
+EditBlog.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

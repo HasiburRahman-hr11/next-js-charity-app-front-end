@@ -9,7 +9,7 @@ import { Box, Container, Typography, CircularProgress } from '@mui/material';
 import { useFirebase } from '../../hooks/useFirebase';
 import SignInMethods from '../../components/SignInMethods/SignInMethods';
 
-const index = () => {
+const Login = () => {
 
     // Firebase functions
     const { signInWithEmailPassword, loading } = useFirebase();
@@ -34,7 +34,7 @@ const index = () => {
         if (user.email || user.displayName) {
             router.push('/')
         }
-    }, [user])
+    }, [user , router])
 
     return (
         <>
@@ -109,9 +109,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default Login;
 
-index.getLayout = function pageLayout(page) {
+Login.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

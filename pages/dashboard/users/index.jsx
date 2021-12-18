@@ -27,7 +27,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const Users = () => {
 
 
     const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const index = () => {
 
     useEffect(() => {
         getAllUsers(dispatch);
-    }, []);
+    }, [dispatch]);
 
     const handleDeleteUser = (id) => {
         const isAgree = window.confirm('Confirm delete user?');
@@ -113,9 +113,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default Users;
 
-index.getLayout = function pageLayout(page) {
+Users.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

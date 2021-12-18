@@ -5,7 +5,7 @@ import PrivateRoute from '../../utils/PrivateRoute';
 // Redux
 import { useSelector } from 'react-redux';
 
-const index = () => {
+const Profile = () => {
 
     // Redux
     const user = useSelector((state) => state.auth.user);
@@ -57,4 +57,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Profile;

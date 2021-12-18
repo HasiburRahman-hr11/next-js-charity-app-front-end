@@ -15,7 +15,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const Donate = () => {
     return (
         <>
             <Head>
@@ -45,4 +45,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Donate;

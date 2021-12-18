@@ -32,7 +32,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const AddCase = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState(null);
     const [thumbnail, setThumbnail] = useState('');
@@ -141,9 +141,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default AddCase;
 
-index.getLayout = function pageLayout(page) {
+AddCase.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

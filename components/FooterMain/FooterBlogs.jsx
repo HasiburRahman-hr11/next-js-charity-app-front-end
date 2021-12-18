@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 
-// Fake Data
-import { blogs } from '../../fakeData';
 import { BsBox } from 'react-icons/bs';
 
 const FooterBlogs = () => {
+    const { blogs, isFetching } = useSelector(state => state.blogs)
     return (
         <Box component="div">
 

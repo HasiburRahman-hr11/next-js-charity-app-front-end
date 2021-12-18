@@ -32,7 +32,7 @@ const styles = {
     }
 }
 
-const index = () => {
+const AddBlog = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState(null);
     const [thumbnail, setThumbnail] = useState('');
@@ -139,9 +139,9 @@ const index = () => {
     );
 };
 
-export default index;
+export default AddBlog;
 
-index.getLayout = function pageLayout(page) {
+AddBlog.getLayout = function pageLayout(page) {
     return (
         <>
             {page}
