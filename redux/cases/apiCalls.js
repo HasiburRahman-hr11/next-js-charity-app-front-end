@@ -6,7 +6,7 @@ import { addNewCaseFailed, addNewCaseStart, addNewCaseSuccess, getAllCasesStart,
 export const addNewCase = async (dispatch, formData, router) => {
     dispatch(addNewCaseStart());
     try {
-        const { data } = await axios.post('http://localhost:8000/cases/add', formData);
+        const { data } = await axios.post('https://charit-able-api.herokuapp.com/cases/add', formData);
         dispatch(addNewCaseSuccess(data));
         successNotify('Case added successfully');
         router.push(`/dashboard/cases/edit/${data._id}`);
@@ -21,7 +21,7 @@ export const addNewCase = async (dispatch, formData, router) => {
 export const getAllCases = async (dispatch) => {
     dispatch(getAllCasesStart())
     try {
-        const { data } = await axios.get('http://localhost:8000/cases');
+        const { data } = await axios.get('https://charit-able-api.herokuapp.com/cases');
         dispatch(getAllCasesSuccess(data))
     } catch (error) {
         console.log(error);
@@ -33,7 +33,7 @@ export const getAllCases = async (dispatch) => {
 export const updateCase = async (dispatch, id, formData) => {
     dispatch(updateCaseStart());
     try {
-        const { data } = await axios.put(`http://localhost:8000/cases/${id}`, formData);
+        const { data } = await axios.put(`https://charit-able-api.herokuapp.com/cases/${id}`, formData);
         dispatch(updateCaseSuccess(data));
         successNotify('Case updated successfully');
     } catch (error) {
@@ -47,7 +47,7 @@ export const updateCase = async (dispatch, id, formData) => {
 export const deleteCase = async (dispatch, id) => {
     dispatch(deleteCaseStart());
     try {
-        const { data } = await axios.delete(`http://localhost:8000/cases/${id}`);
+        const { data } = await axios.delete(`https://charit-able-api.herokuapp.com/cases/${id}`);
         dispatch(deleteCaseSuccess(data));
         successNotify('Case deleted successfully');
     } catch (error) {

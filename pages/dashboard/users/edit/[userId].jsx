@@ -52,7 +52,7 @@ const index = () => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:8000/users/user-id/${query.userId}`);
+                const { data } = await axios.get(`https://charit-able-api.herokuapp.com/users/user-id/${query.userId}`);
                 setUserInfo({
                     ...userInfo,
                     name: data.name,

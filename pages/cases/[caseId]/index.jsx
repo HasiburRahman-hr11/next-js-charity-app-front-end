@@ -39,7 +39,7 @@ const index = () => {
     useEffect(() => {
         const getCase = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:8000/cases/${query.caseId}`);
+                const { data } = await axios.get(`https://charit-able-api.herokuapp.com/cases/${query.caseId}`);
                 setSingleCase(data);
                 setLoading(false);
             } catch (error) {

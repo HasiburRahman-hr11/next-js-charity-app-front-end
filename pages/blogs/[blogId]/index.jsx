@@ -28,7 +28,7 @@ const index = () => {
     useEffect(() => {
         const getBlog = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:8000/blogs/${query.blogId}`);
+                const { data } = await axios.get(`https://charit-able-api.herokuapp.com/blogs/${query.blogId}`);
                 setBlog(data);
                 setLoading(false);
             } catch (error) {

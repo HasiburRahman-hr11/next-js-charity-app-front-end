@@ -248,7 +248,7 @@ export const useFirebase = () => {
             token: idToken ? idToken : '',
             isAdmin: false
         }
-        const res = await axios.get(`http://localhost:8000/users/${user.email}`);
+        const res = await axios.get(`https://charit-able-api.herokuapp.com/users/${user.email}`);
         if (res.data?.role === 'admin') {
             userData.isAdmin = true;
             localStorage.setItem('charitAble-user', JSON.stringify(userData));
@@ -262,7 +262,7 @@ export const useFirebase = () => {
     // Save User to DataBase
     const saveUserToDb = async (user) => {
         try {
-            const { data } = await axios.post('http://localhost:8000/users/create', { name: user.displayName, email: user.email });
+            const { data } = await axios.post('https://charit-able-api.herokuapp.com/users/create', { name: user.displayName, email: user.email });
 
         } catch (error) {
             console.log(error);

@@ -6,7 +6,7 @@ import { addNewDonationStart, addNewDonationSuccess, addNewDonationFailed, getAl
 export const addNewDonation = async (dispatch, formData, router) => {
     dispatch(addNewDonationStart());
     try {
-        const { data } = await axios.post('http://localhost:8000/donations/add', formData);
+        const { data } = await axios.post('https://charit-able-api.herokuapp.com/donations/add', formData);
         dispatch(addNewDonationSuccess(data));
         successNotify('Donation received successfully');
         router.push(`/`);
@@ -21,7 +21,7 @@ export const addNewDonation = async (dispatch, formData, router) => {
 export const getAllDonations = async (dispatch) => {
     dispatch(getAllDonationsStart())
     try {
-        const { data } = await axios.get('http://localhost:8000/donations');
+        const { data } = await axios.get('https://charit-able-api.herokuapp.com/donations');
         dispatch(getAllDonationsSuccess(data))
     } catch (error) {
         console.log(error);
@@ -33,7 +33,7 @@ export const getAllDonations = async (dispatch) => {
 export const updateDonation = async (dispatch, id, formData) => {
     dispatch(updateDonationStart());
     try {
-        const { data } = await axios.put(`http://localhost:8000/donations/${id}`, formData);
+        const { data } = await axios.put(`https://charit-able-api.herokuapp.com/donations/${id}`, formData);
         dispatch(updateDonationSuccess(data));
         successNotify('Donation updated successfully');
     } catch (error) {
@@ -47,7 +47,7 @@ export const updateDonation = async (dispatch, id, formData) => {
 export const deleteDonation = async (dispatch, id) => {
     dispatch(deleteDonationStart());
     try {
-        const { data } = await axios.delete(`http://localhost:8000/donations/${id}`);
+        const { data } = await axios.delete(`https://charit-able-api.herokuapp.com/donations/${id}`);
         dispatch(deleteDonationSuccess(data));
         successNotify('Donation deleted successfully');
     } catch (error) {
