@@ -14,7 +14,7 @@ const Loading = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            zIndex:'999'
+            zIndex:'50'
         }}>
             <CircularProgress sx={{color:'var(--primary-color)'}} />
         </Box>

@@ -12,6 +12,7 @@ import Loading from '../../../components/Loading/Loading';
 
 import { deleteUser, getAllUsers } from '../../../redux/users/apiCalls';
 import { useState } from 'react';
+import AdminRoute from '../../../utils/AdminRoute';
 
 const styles = {
     icon: {
@@ -49,7 +50,7 @@ const index = () => {
     }
 
     return (
-        <>
+        <AdminRoute>
             <Head>
                 <title>Users | CharitAble Next Js Website</title>
             </Head>
@@ -109,7 +110,7 @@ const index = () => {
 
                 </Container>
             </Box>
-        </>
+        </AdminRoute>
     );
 };
 

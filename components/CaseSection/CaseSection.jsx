@@ -1,15 +1,16 @@
-import React from 'react';
 import Head from 'next/head';
-import { Container, Grid, Box } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { Container, Box } from '@mui/material';
 
 // Components
 import SectionHeader from '../SectionHeader/SectionHeader';
 import CaseSlider from '../CaseSlider/CaseSlider';
 
-// Fake Data
-import {cases} from '../../fakeData';
 
-const CaseSection = () => {
+const CaseSection = ({ cases }) => {
+
+    const { cases } = useSelector(state => state.cases)
+
     return (
         <>
             <Head>

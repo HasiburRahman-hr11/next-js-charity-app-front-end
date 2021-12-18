@@ -3,8 +3,20 @@ import Link from 'next/link';
 
 import { Box, Typography } from '@mui/material';
 import { FiEdit } from 'react-icons/fi';
+import { AiOutlineDelete } from 'react-icons/ai';
 
-const DashboardCard = ({ data, link }) => {
+const styles = {
+    iconStyle: {
+        width: '35px',
+        height: '35px',
+        fontSize: '22px',
+        position: 'absolute',
+        right: '10px',
+        top: '10px'
+    }
+}
+
+const DashboardCard = ({ data, link, deleteHandler }) => {
     return (
         <Box component="div" sx={{
             backgroundColor: '#fff',
@@ -21,19 +33,21 @@ const DashboardCard = ({ data, link }) => {
                 fontSize: '20px',
                 textAlign: 'center'
             }}>
-                {data.title}
+                <Link href={`cases/${data._id}`}>
+                    <a> {data.title}</a>
+                </Link>
+
             </Typography>
-            <span className='icon__wrapper_primary' style={{
-                width: '35px',
-                height: '35px',
-                fontSize: '22px',
-                position: 'absolute',
-                right: '10px',
-                top: '10px'
-            }}>
+            <span className='icon__wrapper_primary' style={styles.iconStyle}>
                 <Link href={`${link}/${data._id}`}>
                     <a><FiEdit /></a>
                 </Link>
+            </span>
+
+            <span className='icon__wrapper_primary' style={{ ...styles.iconStyle, backgroundColor: '#DB5146', right: '55px' }}
+                onClick={() => deleteHandler(data._id)}
+            >
+                <AiOutlineDelete />
             </span>
         </Box>
     );

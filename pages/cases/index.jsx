@@ -1,18 +1,22 @@
-import React from 'react';
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
 import { Grid, Container, Box } from '@mui/material'
 
 // Components
 import PageBanner from '../../components/PageBanner/PageBanner';
 import MissionSection from '../../components/MissionSection/MissionSection';
 import SectionHeader from '../../components/SectionHeader/SectionHeader';
-
-// Fake Data
-import { cases } from '../../fakeData';
+import Loading from '../../components/Loading/Loading';
 import CaseCard from '../../components/CaseCard/CaseCard';
 
 
 const index = () => {
+
+    const { cases, isFetching } = useSelector(state => state.cases)
+    if (isFetching) {
+        return <Loading />
+    }
+
     return (
         <>
             <Head>
@@ -29,19 +33,32 @@ const index = () => {
                 padding: '100px 0'
             }}>
                 <Container fixed>
-                    <SectionHeader
-                        title="Popular Cases What You Should Know"
-                        subtitle="Our Cases?"
-                    />
-                    <Grid container spacing={4} sx={{
-                        marginTop: '50px'
-                    }}>
-                        {cases.map(item => (
-                            <Grid item xs={12} sm={6} md={4} key={item._id}>
-                                <CaseCard data={item} />
+                    {cases.length > 0 ? (
+                        <>
+                            <SectionHeader
+                                title="Popular Cases What You Should Know"
+                                subtitle="Our Cases?"
+                            />
+                            <Grid container spacing={4} sx={{
+                                marginTop: '50px'
+                            }}>
+                                {cases.map(item => (
+                                    <Grid item xs={12} sm={6} md={4} key={item._id}>
+                                        <CaseCard data={item} />
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
+                        </>
+                    ) : (
+                        <Box component="div" className="title" sx={{
+                            padding: '50px 0',
+                            textAlign: 'center',
+                            color: 'var(--title-color)',
+                            fontSize: '30px'
+                        }}>
+                            No Case added yet.
+                        </Box>
+                    )}
                 </Container>
             </Box>
         </>

@@ -12,30 +12,14 @@ import { FaKhanda, FaBloggerB, FaUserAlt } from 'react-icons/fa';
 import { MdExitToApp } from 'react-icons/md'
 import { useFirebase } from '../../hooks/useFirebase';
 
-import Loading from '../Loading/Loading';
-
 const DashboardHeader = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    // const [loading, setLoading] = useState(true);
 
     // Firebase functions
-    const { signOutController, loading } = useFirebase();
-
-    // Redux User State
-    const user = useSelector(state => state.auth.user);
-    const router = useRouter();
-
-    if (loading) {
-        return <Loading />
-    }
-
-    if (!user?.email || !user?.displayName) {
-        router.push('/login')
-    }
-
+    const { signOutController} = useFirebase();
 
     return (
-        <Box component="div" className={styles.dashboard__header}>
+        <Box component="header" className={styles.dashboard__header}>
             <Container fixed>
                 <Grid container>
                     <Grid item xs={8} md={6}>

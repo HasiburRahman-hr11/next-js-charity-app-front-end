@@ -17,7 +17,7 @@ import initializeFirebase from "../firebase/firebase.init";
 
 // Redux
 import { useDispatch } from 'react-redux';
-import { getUserSuccess, logoutSuccess } from "../redux/auth/authActions";
+import { getUserFailed, getUserStart, getUserSuccess, logoutSuccess } from "../redux/auth/authActions";
 
 // Toastify
 import { errorNotify, successNotify } from '../utils/toastify';
@@ -45,6 +45,7 @@ export const useFirebase = () => {
 
     // Sign Up with email and password
     const signUpWithEmailPassword = (name, email, password, router) => {
+        setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
                 // save user info
@@ -60,15 +61,15 @@ export const useFirebase = () => {
                     email: email,
                 }
 
+                saveUserToDb(userData);
+                setAdmin(userData);
 
+                router.push('/')
+                successNotify('Registration Successful');
 
                 // Update user profile to Firebase
                 updateProfile(auth.currentUser, userData).then(() => {
-                    saveUserToDb(userData);
-                    setAdmin(userData);
 
-                    router.push('/profile')
-                    successNotify('Registration Successful');
                 }).catch((error) => {
                     console.log(error)
                 });
@@ -222,6 +223,7 @@ export const useFirebase = () => {
                 setLoading(false);
             } else {
                 setLoading(false);
+                dispatch(getUserFailed(error.message))
             }
         });
         return () => unsubscribe();

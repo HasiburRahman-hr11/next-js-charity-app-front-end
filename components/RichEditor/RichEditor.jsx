@@ -8,14 +8,24 @@ const Editor = dynamic(
     },
     { ssr: false }
 );
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, convertFromHTML, ContentState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from 'draftjs-to-html';
 
-const RichEditor = ({ setValue }) => {
-    const [editorState, setEditorState] = useState(() =>
-        EditorState.createEmpty()
+const RichEditor = ({ setValue, defaultValue }) => {
+
+    const editorWithValue = () => (
+        EditorState.createWithContent(
+            ContentState.createFromBlockArray(
+                convertFromHTML(defaultValue)
+            )
+        )
     );
+    const emptyEditor = () => (
+        EditorState.createEmpty()
+    )
+
+    const [editorState, setEditorState] = useState(defaultValue ? editorWithValue : emptyEditor);
 
     const handleEditorChange = (state) => {
         setEditorState(state);

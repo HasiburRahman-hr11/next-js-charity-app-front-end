@@ -37,7 +37,9 @@ function PrevButton(props) {
 
 const settings = {
     dots: false,
-    infinite: true,
+    autoplay: true,
+    speed: 500,
+    autoplaySpeed: 2500,
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -70,8 +72,8 @@ const settings = {
 
 const CaseSlider = ({ cases }) => {
     return (
-        <Slider {...settings} className='case__slider'>
-            {cases.map((item)=>(
+        <Slider {...settings } infinite={cases.length > 3 ? true : false} className='case__slider'>
+            {cases.map((item) => (
                 <CaseCard data={item} key={item._id} />
             ))}
         </Slider>

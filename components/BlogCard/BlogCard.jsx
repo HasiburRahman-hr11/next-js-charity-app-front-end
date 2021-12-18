@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
-import {BsFillPersonFill , BsCalendarDate} from 'react-icons/bs';
+import { BsFillPersonFill, BsCalendarDate } from 'react-icons/bs';
+import convertToBase64 from '../../utils/convertToBase64';
 
 const styles = {
     card: {
@@ -18,18 +19,18 @@ const styles = {
     list: {
         display: 'flex',
         justifyContent: 'space-between',
-        padding:'18px 0',
-        borderTop:'1px solid #ddd',
-        margin:'0 30px'
+        padding: '18px 0',
+        borderTop: '1px solid #ddd',
+        margin: '0 30px'
     },
-    listItem:{
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        color:'var(--primary-color)',
-        '& span':{
-            marginLeft:'5px',
-            color:'#666'
+    listItem: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'var(--primary-color)',
+        '& span': {
+            marginLeft: '5px',
+            color: '#666'
         }
     }
 }
@@ -37,7 +38,9 @@ const styles = {
 const BlogCard = ({ blog }) => {
     return (
         <Box component="div" className='blog__item' sx={styles.card}>
-            <img src={blog.thumbnail} alt={blog.title} />
+            {blog?.thumbnail && (
+                <img src={`data:image/png;base64,${convertToBase64(blog.thumbnail.data)}`} alt={blog.title} />
+            )}
 
             <Typography variant="h2" component="h2" sx={styles.title}>
                 <Link href={`/blogs/${blog._id}`}>
@@ -47,11 +50,11 @@ const BlogCard = ({ blog }) => {
 
             <Box component="ul" sx={styles.list}>
                 <Box component="li" sx={styles.listItem}>
-                    <BsFillPersonFill/>
+                    <BsFillPersonFill />
                     <span>{blog.author}</span>
                 </Box>
                 <Box component="li" sx={styles.listItem}>
-                    <BsCalendarDate/>
+                    <BsCalendarDate />
                     <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
                 </Box>
             </Box>

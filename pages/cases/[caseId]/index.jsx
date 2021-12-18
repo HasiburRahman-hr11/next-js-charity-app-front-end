@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from "next/router";
+import axios from 'axios';
 
-import { Container, Typography, Box, Grid, Button } from '@mui/material';
+import convertToBase64 from '../../../utils/convertToBase64';
+import { Container, Typography, Box, Grid } from '@mui/material';
 import PageBanner from '../../../components/PageBanner/PageBanner';
 import Loading from '../../../components/Loading/Loading';
 
-// Fake Data
-import { cases } from '../../../fakeData';
 
 
 const styles = {
@@ -37,17 +37,19 @@ const index = () => {
     const { query } = useRouter();
 
     useEffect(() => {
-        const getSingleCase = async () => {
+        const getCase = async () => {
             try {
-                const data = cases.find((item) => item._id === query.caseId);
+                const { data } = await axios.get(`http://localhost:8000/cases/${query.caseId}`);
                 setSingleCase(data);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
+                console.log();
                 setLoading(false);
             }
         }
-        getSingleCase();
+        if (query.caseId) {
+            getCase();
+        }
     }, [query.caseId]);
 
     if (loading) {
@@ -70,7 +72,9 @@ const index = () => {
                     <Grid container spacing={5}>
                         <Grid item md={8} xs={12}>
                             <Box component="div">
-                                <img src={singleCase?.thumbnail} alt={singleCase?.title} />
+                                {singleCase.thumbnail && (
+                                    <img src={`data:image/png;base64,${convertToBase64(singleCase.thumbnail.data)}`} alt={singleCase.title} />
+                                )}
                                 <Link href="/donate">
                                     <a style={styles.donateBtn}>Donate Now</a>
                                 </Link>
@@ -79,17 +83,7 @@ const index = () => {
                                 {singleCase?.title}
                             </Typography>
 
-                            <Typography variant="p" component="p" sx={{
-                                color: '#666',
-                                marginBottom: '20px'
-                            }}>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, id natus tenetur rerum odio tempora illo quis possimus, eum doloribus, corporis molestias delectus placeat eligendi neque autem ut nesciunt velit.
-                            </Typography>
-                            <Typography variant="p" component="p" sx={{
-                                color: '#666'
-                            }}>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, id natus tenetur rerum odio tempora illo quis possimus, eum doloribus, corporis molestias delectus placeat eligendi neque autem ut nesciunt velit.
-                            </Typography>
+                            <div dangerouslySetInnerHTML={{ __html: singleCase.description }}></div>
                         </Grid>
                         <Grid item md={4} xs={12} sx={{
                             display: {

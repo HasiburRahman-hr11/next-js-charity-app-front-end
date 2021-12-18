@@ -48,6 +48,7 @@ button {
 
 label {
   display: block;
+  margin-bottom: 5px;
 }
 
 input::-webkit-outer-spin-button,
@@ -71,7 +72,9 @@ input[type=number] {
   font-weight: 700;
   padding: 15px 35px;
   border-radius: 5px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all .3s;
   border: none;
   font-size: 18px;

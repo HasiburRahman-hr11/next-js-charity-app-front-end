@@ -1,14 +1,16 @@
-import React from 'react';
+import Head from 'next/head';
+import { useSelector } from 'react-redux';
 import { Container, Grid, Box } from '@mui/material';
 
 // Components
 import SectionHeader from '../SectionHeader/SectionHeader';
 import BlogCard from '../BlogCard/BlogCard';
 
-// Fake Data
-import {blogs} from '../../fakeData';
 
 const BlogSection = () => {
+    
+    const { blogs } = useSelector(state => state.blogs)
+
     return (
         <Box component="section" className='section blog__section' sx={{
             padding: '100px 0'

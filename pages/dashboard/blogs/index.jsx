@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader';
 
-import { blogs } from '../../../fakeData';
-
 import DashboardCard from '../../../components/DashboardCard/DashboardCard';
+import AdminRoute from '../../../utils/AdminRoute';
+import Loading from '../../../components/Loading/Loading';
+import { deleteBlog, getAllBlogs } from '../../../redux/blogs/apiCalls';
 
 const index = () => {
+
+    const dispatch = useDispatch();
+    const { blogs, isFetching } = useSelector(state => state.blogs);
+
+    const handleDeleteBlog = (id) => {
+        const isAgree = window.confirm('Confirm delete blog?');
+        if (isAgree) {
+            deleteBlog(dispatch, id);
+        }
+    }
+
+    useEffect(() => {
+        getAllBlogs(dispatch);
+    }, []);
+
+    if (isFetching) {
+        return <Loading />
+    }
+
     return (
-        <>
+        <AdminRoute>
             <Head>
                 <title>Blogs | CharitAble Next Js Website</title>
             </Head>
@@ -29,13 +50,17 @@ const index = () => {
                     <Grid container spacing={5}>
                         {blogs.map(item => (
                             <Grid item xs={12} sm={6} md={4} key={item._id}>
-                                <DashboardCard data={item} link='/dashboard/blogs/edit' />
+                                <DashboardCard
+                                    data={item}
+                                    link='/dashboard/blogs/edit'
+                                    deleteHandler={handleDeleteBlog}
+                                />
                             </Grid>
                         ))}
                     </Grid>
                 </Container>
             </Box>
-        </>
+        </AdminRoute>
     );
 };
 

@@ -1,13 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
+import convertToBase64 from '../../utils/convertToBase64.js'
 
 const styles = {
     card: {
         backgroundColor: '#fff',
         boxShadow: 'rgba(0, 0, 0, 0.04) 0px 3px 5px',
         margin: '0 5px',
-        border:'1px solid #f5f5f5'
+        border: '1px solid #f5f5f5'
     },
     title: {
         color: 'var(--title-color)',
@@ -33,7 +34,9 @@ const styles = {
 const CaseCard = ({ data }) => {
     return (
         <Box component="div" sx={styles.card}>
-            <img src={data.thumbnail} alt={data.title} />
+            {data?.thumbnail && (
+                <img src={`data:image/png;base64,${convertToBase64(data.thumbnail.data)}`} alt={data.title} />
+            )}
 
             <Typography variant="h2" component="h2" sx={styles.title}>
                 <Link href={`/cases/${data._id}`}>

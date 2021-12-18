@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader';
 
-import { cases } from '../../../fakeData';
 
 import DashboardCard from '../../../components/DashboardCard/DashboardCard';
+import AdminRoute from '../../../utils/AdminRoute';
+import { deleteCase, getAllCases } from '../../../redux/cases/apiCalls';
+import Loading from '../../../components/Loading/Loading';
 
 const index = () => {
+
+    const dispatch = useDispatch();
+    const {cases , isFetching} = useSelector(state => state.cases);
+
+    const handleDeleteCase = (id) => {
+        const isAgree = window.confirm('Confirm delete case?');
+        if (isAgree) {
+            deleteCase(dispatch, id);
+        }
+    }
+
+    useEffect(() => {
+        getAllCases(dispatch);
+    }, []);
+
+    if(isFetching){
+        return <Loading />
+    }
+
     return (
-        <>
+        <AdminRoute>
             <Head>
                 <title>Cases | CharitAble Next Js Website</title>
             </Head>
@@ -29,13 +51,17 @@ const index = () => {
                     <Grid container spacing={5}>
                         {cases.map(item => (
                             <Grid item xs={12} sm={6} md={4} key={item._id}>
-                                <DashboardCard data={item} link='/dashboard/cases/edit' />
+                                <DashboardCard 
+                                data={item} 
+                                link='/dashboard/cases/edit'
+                                deleteHandler={handleDeleteCase} 
+                                />
                             </Grid>
                         ))}
                     </Grid>
                 </Container>
             </Box>
-        </>
+        </AdminRoute>
     );
 };
 

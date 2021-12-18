@@ -1,5 +1,6 @@
 import { deleteUserFailed, deleteUserStart, deleteUserSuccess, getAllUsersFailed, getAllUsersStart, getAllUsersSuccess, updateUserFailed, updateUserStart, updateUserSuccess } from "./usersActions"
 import axios from 'axios';
+import { errorNotify, successNotify } from "../../utils/toastify";
 
 export const getAllUsers = async (dispatch) => {
     dispatch(getAllUsersStart())
@@ -17,9 +18,11 @@ export const updateUser = async (dispatch , userId , userData) => {
     try {
         const { data } = await axios.put(`http://localhost:8000/users/${userId}` ,userData);
         dispatch(updateUserSuccess(data));
+        successNotify('User updated successfully')
     } catch (error) {
         console.log(error);
         dispatch(updateUserFailed(error));
+        errorNotify('Could not update the user')
     }
 }
 

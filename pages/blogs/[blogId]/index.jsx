@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from "next/router";
+import axios from 'axios';
 
-import { Container, Typography, Box, Grid, Button } from '@mui/material';
+import convertToBase64 from '../../../utils/convertToBase64';
+import { Container, Typography, Box, Grid } from '@mui/material';
 import PageBanner from '../../../components/PageBanner/PageBanner';
 import Loading from '../../../components/Loading/Loading';
-
-// Fake Data
-import { blogs } from '../../../fakeData';
 
 
 const styles = {
@@ -30,19 +28,21 @@ const index = () => {
     useEffect(() => {
         const getBlog = async () => {
             try {
-                const data = blogs.find((item) => item._id === query.blogId);
+                const { data } = await axios.get(`http://localhost:8000/blogs/${query.blogId}`);
                 setBlog(data);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
+                console.log();
                 setLoading(false);
             }
         }
-        getBlog();
+        if (query.blogId) {
+            getBlog();
+        }
     }, [query.blogId]);
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
     return (
         <>
@@ -60,28 +60,14 @@ const index = () => {
                 <Container fixed>
                     <Grid container spacing={5}>
                         <Grid item md={8} xs={12}>
-                            <img src={blog?.thumbnail} alt={blog?.title} />
+                            {blog.thumbnail && (
+                                <img src={`data:image/png;base64,${convertToBase64(blog.thumbnail.data)}`} alt={blog.title} />
+                            )}
                             <Typography variant="h2" component="h2" sx={styles.title}>
                                 {blog?.title}
                             </Typography>
 
-                            <Typography variant="p" component="p" sx={{
-                                color: '#666',
-                                marginBottom: '20px'
-                            }}>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, id natus tenetur rerum odio tempora illo quis possimus, eum doloribus, corporis molestias delectus placeat eligendi neque autem ut nesciunt velit.
-                            </Typography>
-                            <Typography variant="p" component="p" sx={{
-                                color: '#666',
-                                marginBottom: '20px'
-                            }}>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sit maiores qui! Accusamus aut debitis tempore dignissimos dolorem molestias blanditiis repellendus corrupti eaque? Modi odit eum ullam, facilis quod ea, quo non, iure sed reprehenderit accusantium architecto dolorum. Velit, explicabo.
-                            </Typography>
-                            <Typography variant="p" component="p" sx={{
-                                color: '#666'
-                            }}>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione error doloribus aspernatur praesentium harum impedit doloremque facere labore maxime magnam at sequi blanditiis in, consectetur vel incidunt veniam beatae. Velit minus vitae nobis veritatis eveniet.
-                            </Typography>
+                            <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
                         </Grid>
                         <Grid item md={4} xs={12} sx={{
                             display: {

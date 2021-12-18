@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import Head from 'next/head';
-import { Box, Container, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Container, Typography , CircularProgress } from '@mui/material';
 
 import { MdAddPhotoAlternate } from 'react-icons/md'
 
 import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader';
 import RichEditor from "../../../components/RichEditor/RichEditor";
+import AdminRoute from "../../../utils/AdminRoute";
+
+import { addNewCase } from '../../../redux/cases/apiCalls'
+
 const styles = {
     formWrapper: {
         maxWidth: '850px',
@@ -32,16 +38,36 @@ const index = () => {
     const [thumbnail, setThumbnail] = useState('');
     const [thumbnailPreview, setThumbnailPreview] = useState('');
 
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const { isFetching } = useSelector(state => state.cases);
+
+
+
+
+    const handleThumbnailChange = (e) => {
+        if (e.target.files[0].size > 870400) {
+            alert('File size is too large. Max size is 850kb')
+        } else {
+            setThumbnailPreview(URL.createObjectURL(e.target.files[0]));
+            setThumbnail(e.target.files[0]);
+        }
+
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-    }
-    const handleThumbnailChange = (e) => {
-        setThumbnailPreview(URL.createObjectURL(e.target.files[0]));
-        setThumbnail(e.target.files[0]);
+        const formData = new FormData();
+
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('thumbnail', thumbnail);
+
+        addNewCase(dispatch, formData , router);
     }
 
     return (
-        <>
+        <AdminRoute>
             <Head>
                 <title>Add New Case | CharitAble Next Js Website</title>
             </Head>
@@ -57,7 +83,7 @@ const index = () => {
                     </Typography>
 
                     <Box component="div" sx={styles.formWrapper}>
-                        <form onSubmit={submitHandler}>
+                        <form onSubmit={submitHandler} encType="multipart/form-data">
                             <div className="input__group">
                                 <label htmlFor="title" className="admin__label">Case Title</label>
                                 <input
@@ -65,6 +91,9 @@ const index = () => {
                                     name="title"
                                     id="title"
                                     className="admin__input"
+                                    required
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                 />
                             </div>
                             <div className="input__group">
@@ -93,16 +122,22 @@ const index = () => {
                                         }}>Remove</button>
                                     )}
                                 </Box>
-                                <input type="file" name="thumbnail" id="thumbnail" className="admin__image_input" hidden onChange={handleThumbnailChange} />
+                                <input type="file" accept="image/*" name="thumbnail" id="thumbnail" className="admin__image_input" hidden onChange={handleThumbnailChange} />
                             </Box>
 
-                            <button type="submit" className="btn__primary">Submit</button>
+                            <button type="submit" className="btn__primary" style={{ maxHeight: '45px', width: '120px' }}>
+                                {isFetching ? <CircularProgress sx={{
+                                    color: '#fff',
+                                    width: '25px !important',
+                                    height: '25px !important'
+                                }} /> : 'Submit'}
+                            </button>
                         </form>
                     </Box>
                 </Container>
             </Box>
 
-        </>
+        </AdminRoute>
     );
 };
 

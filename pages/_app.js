@@ -8,9 +8,6 @@ import { ToastContainer } from "react-toastify";
 
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import initializeFirebase from '../firebase/firebase.init';
-
-// initializeFirebase();
 
 function MyApp({ Component, pageProps }) {
 
