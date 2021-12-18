@@ -39,7 +39,7 @@ const FooterCompanyInfo = () => {
             }}>
                 {socials.map((social, index) => (
                     <Box component="li" key={index}>
-                        <a href={social.link} target="_blank" style={{
+                        <a href={social.link} target="_blank" rel="noreferrer" style={{
                             color:'#fff',
                             fontSize:'22px',
                             marginRight:'15px'

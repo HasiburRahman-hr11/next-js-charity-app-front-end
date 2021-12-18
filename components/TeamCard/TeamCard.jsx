@@ -63,7 +63,7 @@ const TeamCard = ({ team }) => {
                 }}>
                     {team.social.map((item, index) => (
                         <li key={index} style={{ margin: '0 10px' }}>
-                            <a href={item.link} target="_blank" className='team__icon'>
+                            <a href={item.link} target="_blank" rel="noreferrer" className='team__icon'>
                                 {item.icon}
                             </a>
                         </li>
