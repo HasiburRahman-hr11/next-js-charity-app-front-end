@@ -8,7 +8,7 @@ import { Box, Container, Grid } from '@mui/material';
 
 // React Icons
 import { AiOutlineMenu, AiOutlineClose, AiFillFileAdd } from 'react-icons/ai';
-import { FaKhanda, FaBloggerB, FaUserAlt } from 'react-icons/fa';
+import { FaKhanda, FaBloggerB, FaUserAlt , FaDonate } from 'react-icons/fa';
 import { MdExitToApp } from 'react-icons/md'
 import { useFirebase } from '../../hooks/useFirebase';
 
@@ -49,6 +49,11 @@ const DashboardHeader = () => {
                     <li onClick={() => setMenuOpen(false)}>
                         <Link href="/dashboard/add-case"><a>
                             <span className={styles.list__icon}><AiFillFileAdd /></span> Add Case
+                        </a></Link>
+                    </li>
+                    <li onClick={() => setMenuOpen(false)}>
+                        <Link href="/dashboard/donations"><a>
+                            <span className={styles.list__icon}><FaDonate /></span> Donations
                         </a></Link>
                     </li>
                     <li onClick={() => setMenuOpen(false)}>

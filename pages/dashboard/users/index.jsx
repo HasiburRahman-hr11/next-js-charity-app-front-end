@@ -11,7 +11,6 @@ import DashboardHeader from '../../../components/DashboardHeader/DashboardHeader
 import Loading from '../../../components/Loading/Loading';
 
 import { deleteUser, getAllUsers } from '../../../redux/users/apiCalls';
-import { useState } from 'react';
 import AdminRoute from '../../../utils/AdminRoute';
 
 const styles = {
@@ -86,7 +85,7 @@ const index = () => {
                             <TableBody>
                                 {userState.users.map((user) => (
                                     <TableRow
-                                        key={user.name}
+                                        key={user._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">

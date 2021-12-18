@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import {useRouter} from 'next/router';
 import { Grid, Box, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { addNewDonation } from '../../redux/donations/apiCalls';
 
 
 const styles = {
@@ -44,14 +47,14 @@ const styles = {
 
 const DonationForm = () => {
     const [formData, setFormData] = useState({
-        userInfo: {
+        userInformation: {
             firstName: '',
             lastName: '',
             email: '',
             address: '',
             message: ''
         },
-        paymentInfo: {
+        paymentInformation: {
             cardHolder: '',
             cardType: '',
             cardNumber: '',
@@ -61,10 +64,13 @@ const DonationForm = () => {
         }
     });
 
+    const dispatch = useDispatch();
+    const router = useRouter();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(formData);
+        addNewDonation(dispatch, formData , router)
     }
     return (
         <form className="donation__form" style={styles.form} onSubmit={handleSubmit}>
@@ -93,8 +99,8 @@ const DonationForm = () => {
                                 placeholder='First Name'
                                 required
                                 style={styles.input}
-                                value={formData.userInfo.firstName}
-                                onChange={(e) => setFormData({ ...formData, userInfo: { ...formData.userInfo, firstName: e.target.value } })}
+                                value={formData.userInformation.firstName}
+                                onChange={(e) => setFormData({ ...formData, userInformation: { ...formData.userInformation, firstName: e.target.value } })}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6} sx={{
@@ -109,8 +115,8 @@ const DonationForm = () => {
                                 placeholder='Last Name'
                                 required
                                 style={styles.input}
-                                value={formData.userInfo.lastName}
-                                onChange={(e) => setFormData({ ...formData, userInfo: { ...formData.userInfo, lastName: e.target.value } })}
+                                value={formData.userInformation.lastName}
+                                onChange={(e) => setFormData({ ...formData, userInformation: { ...formData.userInformation, lastName: e.target.value } })}
                             />
                         </Grid>
                     </Grid>
@@ -134,8 +140,8 @@ const DonationForm = () => {
                                 placeholder='Email Address'
                                 required
                                 style={styles.input}
-                                value={formData.userInfo.email}
-                                onChange={(e) => setFormData({ ...formData, userInfo: { ...formData.userInfo, email: e.target.value } })}
+                                value={formData.userInformation.email}
+                                onChange={(e) => setFormData({ ...formData, userInformation: { ...formData.userInformation, email: e.target.value } })}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6} sx={{
@@ -150,8 +156,8 @@ const DonationForm = () => {
                                 placeholder='Donation Amount'
                                 required
                                 style={styles.input}
-                                value={formData.paymentInfo.amount}
-                                onChange={(e) => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, amount: e.target.value } })}
+                                value={formData.paymentInformation.amount}
+                                onChange={(e) => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, amount: e.target.value } })}
                                 min={0}
                             />
                         </Grid>
@@ -164,8 +170,8 @@ const DonationForm = () => {
                         placeholder='Your Address'
                         required
                         style={styles.input}
-                        value={formData.userInfo.address}
-                        onChange={(e) => setFormData({ ...formData, userInfo: { ...formData.userInfo, address: e.target.value } })}
+                        value={formData.userInformation.address}
+                        onChange={(e) => setFormData({ ...formData, userInformation: { ...formData.userInformation, address: e.target.value } })}
                     />
                 </div>
                 <div className="input__group">
@@ -173,8 +179,8 @@ const DonationForm = () => {
                         name="message"
                         placeholder='Message'
                         style={{ ...styles.input, minHeight: '100px' }}
-                        value={formData.userInfo.message}
-                        onChange={(e) => setFormData({ ...formData, userInfo: { ...formData.userInfo, message: e.target.value } })}
+                        value={formData.userInformation.message}
+                        onChange={(e) => setFormData({ ...formData, userInformation: { ...formData.userInformation, message: e.target.value } })}
                     />
                 </div>
             </Box>
@@ -194,18 +200,18 @@ const DonationForm = () => {
                     flexWrap: 'wrap',
                     marginBottom: '30px'
                 }}>
-                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInfo.cardType === 'Visa' ? '#08CD7F' : '#B7FCE1'}}
-                        onClick={() => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cardType: 'Visa' } })}>
+                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInformation.cardType === 'Visa' ? '#08CD7F' : '#B7FCE1'}}
+                        onClick={() => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cardType: 'Visa' } })}>
                         <img src="/images/payment-1.png" alt="Visa Card" />
                     </span>
-                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInfo.cardType === 'Master Card' ? '#08CD7F' : '#B7FCE1'}}
-                        onClick={() => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cardType: 'Master Card' } })}>
+                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInformation.cardType === 'Master Card' ? '#08CD7F' : '#B7FCE1'}}
+                        onClick={() => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cardType: 'Master Card' } })}>
                         <img src="/images/payment-2.png" alt="Master Card" />
                     </span>
-                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInfo.cardType === 'Skrill' ? '#08CD7F' : '#B7FCE1'}} onClick={() => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cardType: 'Skrill' } })}>
+                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInformation.cardType === 'Skrill' ? '#08CD7F' : '#B7FCE1'}} onClick={() => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cardType: 'Skrill' } })}>
                         <img src="/images/payment-3.png" alt="Skrill" />
                     </span>
-                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInfo.cardType === 'PayPal' ? '#08CD7F' : '#B7FCE1'}} onClick={() => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cardType: 'PayPal' } })}>
+                    <span style={{...styles.cardImgWrapper, borderColor:formData.paymentInformation.cardType === 'PayPal' ? '#08CD7F' : '#B7FCE1'}} onClick={() => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cardType: 'PayPal' } })}>
                         <img src="/images/payment-4.png" alt="PayPal" />
                     </span>
                 </Box>
@@ -228,8 +234,8 @@ const DonationForm = () => {
                                 placeholder='Card Holder Name'
                                 required
                                 style={styles.input}
-                                value={formData.paymentInfo.cardHolder}
-                                onChange={(e) => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cardHolder: e.target.value } })}
+                                value={formData.paymentInformation.cardHolder}
+                                onChange={(e) => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cardHolder: e.target.value } })}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6} sx={{
@@ -244,8 +250,8 @@ const DonationForm = () => {
                                 placeholder='Card Number'
                                 required
                                 style={styles.input}
-                                value={formData.paymentInfo.cardNumber}
-                                onChange={(e) => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cardNumber: e.target.value } })}
+                                value={formData.paymentInformation.cardNumber}
+                                onChange={(e) => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cardNumber: e.target.value } })}
                             />
                         </Grid>
                     </Grid>
@@ -269,8 +275,8 @@ const DonationForm = () => {
                                 placeholder='CVV'
                                 required
                                 style={styles.input}
-                                value={formData.paymentInfo.cvv}
-                                onChange={(e) => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, cvv: e.target.value } })}
+                                value={formData.paymentInformation.cvv}
+                                onChange={(e) => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, cvv: e.target.value } })}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6} sx={{
@@ -285,10 +291,10 @@ const DonationForm = () => {
                                 placeholder='Expire Date'
                                 required
                                 style={styles.input}
-                                value={formData.paymentInfo.expireDate}
+                                value={formData.paymentInformation.expireDate}
                                 onFocus={(e) => e.target.type = 'date'}
                                 onBlur={(e) => e.target.type = 'text'}
-                                onChange={(e) => setFormData({ ...formData, paymentInfo: { ...formData.paymentInfo, expireDate: e.target.value } })}
+                                onChange={(e) => setFormData({ ...formData, paymentInformation: { ...formData.paymentInformation, expireDate: e.target.value } })}
                             />
                         </Grid>
                     </Grid>

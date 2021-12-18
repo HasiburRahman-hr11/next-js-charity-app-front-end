@@ -41,11 +41,11 @@ const Home = () => {
         <HeroSection />
         <MissionSection />
         <AboutSection />
-        {cases.length > 0 && <CaseSection cases={cases} />}
+        {cases.length > 0 && <CaseSection />}
         <CounterSection />
         <TeamSection />
         <WorldSection />
-        {blogs.length > 0 && <BlogSection blogs={blogs} />}
+        {blogs.length > 0 && <BlogSection />}
 
       </div>
     </>

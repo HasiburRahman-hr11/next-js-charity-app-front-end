@@ -7,7 +7,7 @@ import SectionHeader from '../SectionHeader/SectionHeader';
 import CaseSlider from '../CaseSlider/CaseSlider';
 
 
-const CaseSection = ({ cases }) => {
+const CaseSection = () => {
 
     const { cases } = useSelector(state => state.cases)
 
